@@ -1,4 +1,4 @@
-import { ArrowRight, MailOpen } from 'lucide-react';
+import { ArrowRight, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Pill } from '@/components/ui/Pill';
 import { profile } from '@/data/profile';
@@ -37,8 +37,8 @@ export function Hero() {
             <Button as="a" href="#projects" variant="primary" size="lg" iconRight={<ArrowRight size={18} />}>
               View my work
             </Button>
-            <Button as="a" href="#contact" variant="secondary" size="lg" iconLeft={<MailOpen size={18} />}>
-              Get in touch
+            <Button as="a" href={profile.resumeUrl} target="_blank" rel="noreferrer" variant="secondary" size="lg" iconLeft={<FileText size={18} />}>
+              View CV
             </Button>
           </div>
         </div>
