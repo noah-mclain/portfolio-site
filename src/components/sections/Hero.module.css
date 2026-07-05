@@ -1,0 +1,122 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+  overflow: hidden;
+  scroll-margin-top: 0;
+}
+
+.glow {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(900px, 90vw);
+  aspect-ratio: 1;
+  background:
+    radial-gradient(circle, var(--color-accent-bg-strong) 0%, transparent 60%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: -1;
+  animation: float 12s var(--ease-in-out) infinite alternate;
+}
+
+@keyframes float {
+  from { transform: translate(-50%, -2%) scale(1); }
+  to   { transform: translate(-50%,  2%) scale(1.05); }
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  text-align: center;
+  padding-block: var(--space-12);
+}
+
+.pillRow {
+  display: flex;
+  justify-content: center;
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  color: var(--color-text);
+  max-width: 16ch;
+}
+
+.name {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  letter-spacing: -0.02em;
+}
+
+.tagline {
+  max-width: 56ch;
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.scrollHint {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(180deg, var(--color-accent), transparent);
+  animation: drop 2s var(--ease-in-out) infinite;
+}
+
+@keyframes drop {
+  0%   { transform: translateY(-12px) scaleY(0.6); opacity: 0; }
+  40%  { opacity: 1; }
+  100% { transform: translateY(12px) scaleY(1); opacity: 0; }
+}
+
+@media (max-width: 600px) {
+  .actions {
+    width: 100%;
+  }
+  .actions > * {
+    flex: 1;
+  }
+}

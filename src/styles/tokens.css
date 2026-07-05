@@ -1,0 +1,188 @@
+/* ============================================================
+   Theme tokens
+   - Defaults to dark (matches the original brand)
+   - [data-theme="light"] swaps the palette to a lavender scheme
+     blended from the user's two reference palettes
+   ============================================================ */
+
+:root,
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --color-bg: #0a0a0f;
+  --color-bg-elevated: #11111a;
+  --color-surface: #15151f;
+  --color-surface-hover: #1c1c28;
+  --color-border: #26263a;
+  --color-border-strong: #353550;
+
+  /* Text */
+  --color-text: #f4f4f7;
+  --color-text-muted: #a1a1b3;
+  --color-text-subtle: #6b6b85;
+
+  /* Accent (violet) */
+  --color-accent: #a855f7;
+  --color-accent-strong: #8b5cf6;
+  --color-accent-soft: #c4b5fd;
+  --color-accent-bg: rgba(168, 85, 247, 0.12);
+  --color-accent-bg-strong: rgba(168, 85, 247, 0.22);
+  --color-accent-glow: rgba(168, 85, 247, 0.35);
+
+  --gradient-accent: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+  --gradient-text: linear-gradient(135deg, #c4b5fd 0%, #a855f7 60%, #7c3aed 100%);
+  --gradient-surface: linear-gradient(180deg, rgba(168, 85, 247, 0.05), rgba(168, 85, 247, 0));
+  --gradient-aurora:
+    radial-gradient(ellipse 60% 50% at 50% -10%, rgba(168, 85, 247, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 100% 30%, rgba(124, 58, 237, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 40% at 0% 70%, rgba(196, 181, 253, 0.08) 0%, transparent 60%);
+
+  /* Liquid glass */
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-bg-strong: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-strong: rgba(255, 255, 255, 0.14);
+  --glass-highlight: rgba(255, 255, 255, 0.06);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.32);
+  --glass-blur: blur(18px) saturate(180%);
+  --glass-blur-strong: blur(28px) saturate(200%);
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+
+  /* Surfaces — soft lavender base */
+  --color-bg: #eaedff;
+  --color-bg-elevated: #f3f1fb;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f5f3fc;
+  --color-border: #d5d2e4;
+  --color-border-strong: #bab7cc;
+
+  /* Text — deep indigo for readability */
+  --color-text: #1f2148;
+  --color-text-muted: #5a587a;
+  --color-text-subtle: #8d8aab;
+
+  /* Accent — slightly cooler/deeper purple to keep contrast on light bg */
+  --color-accent: #7c5fd4;
+  --color-accent-strong: #5d40b8;
+  --color-accent-soft: #a6a1e1;
+  --color-accent-bg: rgba(124, 95, 212, 0.1);
+  --color-accent-bg-strong: rgba(124, 95, 212, 0.2);
+  --color-accent-glow: rgba(124, 95, 212, 0.28);
+
+  --gradient-accent: linear-gradient(135deg, #a6a1e1 0%, #7c5fd4 60%, #5d40b8 100%);
+  --gradient-text: linear-gradient(135deg, #383a66 0%, #7c5fd4 70%, #a6a1e1 100%);
+  --gradient-surface: linear-gradient(180deg, rgba(124, 95, 212, 0.05), rgba(124, 95, 212, 0));
+  --gradient-aurora:
+    radial-gradient(ellipse 60% 50% at 50% -10%, rgba(166, 161, 225, 0.5) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 100% 30%, rgba(241, 221, 230, 0.55) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 40% at 0% 70%, rgba(213, 210, 228, 0.45) 0%, transparent 60%);
+
+  /* Liquid glass — frosted lavender */
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-strong: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(124, 95, 212, 0.14);
+  --glass-border-strong: rgba(124, 95, 212, 0.22);
+  --glass-highlight: rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 8px 32px rgba(124, 95, 212, 0.12);
+  --glass-blur: blur(18px) saturate(180%);
+  --glass-blur-strong: blur(28px) saturate(200%);
+}
+
+/* If no preference is set, follow the OS */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+    --color-bg: #eaedff;
+    --color-bg-elevated: #f3f1fb;
+    --color-surface: #ffffff;
+    --color-surface-hover: #f5f3fc;
+    --color-border: #d5d2e4;
+    --color-border-strong: #bab7cc;
+    --color-text: #1f2148;
+    --color-text-muted: #5a587a;
+    --color-text-subtle: #8d8aab;
+    --color-accent: #7c5fd4;
+    --color-accent-strong: #5d40b8;
+    --color-accent-soft: #a6a1e1;
+    --color-accent-bg: rgba(124, 95, 212, 0.1);
+    --color-accent-bg-strong: rgba(124, 95, 212, 0.2);
+    --color-accent-glow: rgba(124, 95, 212, 0.28);
+    --gradient-accent: linear-gradient(135deg, #a6a1e1 0%, #7c5fd4 60%, #5d40b8 100%);
+    --gradient-text: linear-gradient(135deg, #383a66 0%, #7c5fd4 70%, #a6a1e1 100%);
+    --gradient-surface: linear-gradient(180deg, rgba(124, 95, 212, 0.05), rgba(124, 95, 212, 0));
+    --gradient-aurora:
+      radial-gradient(ellipse 60% 50% at 50% -10%, rgba(166, 161, 225, 0.5) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 100% 30%, rgba(241, 221, 230, 0.55) 0%, transparent 60%),
+      radial-gradient(ellipse 30% 40% at 0% 70%, rgba(213, 210, 228, 0.45) 0%, transparent 60%);
+    --glass-bg: rgba(255, 255, 255, 0.55);
+    --glass-bg-strong: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(124, 95, 212, 0.14);
+    --glass-border-strong: rgba(124, 95, 212, 0.22);
+    --glass-highlight: rgba(255, 255, 255, 0.5);
+    --glass-shadow: 0 8px 32px rgba(124, 95, 212, 0.12);
+  }
+}
+
+/* ============================================================
+   Non-themed tokens (typography, spacing, radii, motion)
+   ============================================================ */
+
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  --font-script: 'Caveat', cursive;
+
+  --text-xs: clamp(0.72rem, 0.68rem + 0.18vw, 0.8rem);
+  --text-sm: clamp(0.82rem, 0.78rem + 0.2vw, 0.92rem);
+  --text-base: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
+  --text-lg: clamp(1.05rem, 0.98rem + 0.4vw, 1.2rem);
+  --text-xl: clamp(1.2rem, 1.1rem + 0.6vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --text-3xl: clamp(1.9rem, 1.6rem + 1.5vw, 2.75rem);
+  --text-4xl: clamp(2.4rem, 1.9rem + 2.5vw, 4rem);
+  --text-5xl: clamp(3rem, 2.2rem + 4vw, 5.5rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  --container-max: 1280px;
+  --container-padding: clamp(1.25rem, 4vw, 2.5rem);
+  --section-gap: clamp(4rem, 8vw, 8rem);
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.18);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.22);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 500ms;
+  --duration-reveal: 800ms;
+  --duration-theme: 320ms;
+
+  --z-nav: 50;
+  --z-modal: 100;
+}
