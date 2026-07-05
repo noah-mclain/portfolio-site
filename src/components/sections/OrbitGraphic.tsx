@@ -126,11 +126,18 @@ export function OrbitGraphic() {
                 >
                   <span
                     className={`${styles.planet} ${styles[`planet--${planet.size}`]}`}
-                    style={{ width: `${size}px`, height: `${size}px` }}
+                    style={{
+                      width: `${size}px`,
+                      height: `${size}px`,
+                      transform: `translate(-50%, -50%) rotate(${-angle}deg)`,
+                    }}
                   >
                     <span
                       className={styles.planetLabel}
-                      style={{ transform: `rotate(${-angle}deg)` }}
+                      style={{
+                        animationDuration: `${orbit.duration}s`,
+                        animationDirection: orbit.reverse ? 'reverse' : 'normal',
+                      }}
                     >
                       {planet.label}
                     </span>

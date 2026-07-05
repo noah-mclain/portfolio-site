@@ -26,6 +26,18 @@ export function Navbar() {
     };
   }, [open]);
 
+  // The menu is hidden by CSS at desktop widths; close it too so the body
+  // scroll lock doesn't linger after a rotate/resize.
+  useEffect(() => {
+    if (!open) return;
+    const mq = window.matchMedia('(min-width: 768px)');
+    const handle = () => {
+      if (mq.matches) setOpen(false);
+    };
+    mq.addEventListener('change', handle);
+    return () => mq.removeEventListener('change', handle);
+  }, [open]);
+
   return (
     <header className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
       <div className={`container ${styles.inner}`}>

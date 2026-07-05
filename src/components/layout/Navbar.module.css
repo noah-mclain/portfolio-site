@@ -133,9 +133,18 @@
 }
 
 .mobile {
+  /* The scrolled nav's backdrop-filter makes the header the containing block
+     for fixed descendants, so bottom: 0 would resolve against the header's
+     own height — size the panel explicitly instead. */
   position: fixed;
-  inset: 64px 0 0 0;
-  background: var(--glass-bg-strong);
+  top: 64px;
+  left: 0;
+  right: 0;
+  height: calc(100vh - 64px);
+  height: calc(100dvh - 64px);
+  /* Nested backdrop-filters don't compose (the scrolled nav already has one),
+     so the menu needs a near-opaque background to stay readable. */
+  background: color-mix(in srgb, var(--color-bg) 94%, transparent);
   backdrop-filter: var(--glass-blur-strong);
   -webkit-backdrop-filter: var(--glass-blur-strong);
   padding: var(--space-8) var(--container-padding);

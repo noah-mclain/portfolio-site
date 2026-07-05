@@ -5,6 +5,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Rotated rotator squares poke outside the wrapper and would otherwise
+     create page-level horizontal scroll. */
+  overflow: hidden;
 }
 
 .svg {
@@ -74,6 +77,14 @@
   white-space: nowrap;
   display: inline-block;
   line-height: 1;
+  /* Counter-spin at the orbit's own speed so labels stay upright; the
+     static slot angle is undone on the planet itself. */
+  animation: unspin linear infinite;
+}
+
+@keyframes unspin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
 }
 
 [data-theme='light'] .planetLabel {
