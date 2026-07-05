@@ -95,3 +95,10 @@
     align-items: flex-start;
   }
 }
+
+/* Clear the floating mobile dock so the last line isn't hidden behind it. */
+@media (max-width: 767px) {
+  .footer {
+    padding-bottom: calc(var(--space-12) + 72px + env(safe-area-inset-bottom));
+  }
+}
