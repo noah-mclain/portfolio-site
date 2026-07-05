@@ -6,7 +6,7 @@ export const experience: ExperienceEntry[] = [
     organization: 'Dell Technologies',
     location: 'Cairo, Egypt',
     startDate: 'Aug 2025',
-    endDate: 'Present',
+    endDate: 'Sep 2025',
     highlights: [
       'Cross-department exposure across sales, pre-sales, and engineering at Dell',
       'Hands-on workshops in front-end development, Docker, Kubernetes, and SE practices',
