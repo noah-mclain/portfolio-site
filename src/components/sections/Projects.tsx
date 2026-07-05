@@ -18,14 +18,14 @@ export function Projects() {
       id="projects"
       eyebrow="Selected work"
       title="Projects I've built"
-      description="A handful of the things I've shipped or am still pushing on — across AI agents, computer vision, RL, and developer tooling."
+      description="A handful of the things I've shipped or am still pushing on — across blockchain payments, AI agents, computer vision, RL, and developer tooling."
     >
       <div className={styles.grid}>
         {projects.map((project, i) => (
           <Card
             key={project.name}
             interactive={Boolean(project.link || project.repo)}
-            className={`reveal ${styles.card}`}
+            className={`reveal ${styles.card} ${project.featured ? styles.featured : ''}`}
             data-delay={String((i % 5) + 1)}
           >
             <div className={styles.cardHeader}>

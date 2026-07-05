@@ -6,16 +6,15 @@ export const profile: Profile = {
   fullName: 'Nada Mohamed',
   title: 'AI/ML Engineer',
   tagline:
-    'I build intelligent agents, fine-tune LLMs, and ship AI that solves real problems — from facial recognition to autonomous tooling.',
+    'I build intelligent agents, fine-tune LLMs, and ship systems that solve real problems — from blockchain payroll rails to autonomous tooling.',
   bio: [
-    "I'm a final-year Computer Science student at the Arab Academy for Science & Technology, focused on AI and Machine Learning. I love taking research ideas — Siamese networks, reinforcement learning, multimodal LLMs — and turning them into things people can actually use.",
-    "Lately I've been building Jarvis, a modular AI assistant with code generation, voice, and vision; interning at Dell Technologies; and finishing up a 7-month Microsoft ML Engineering program with DEPI.",
+    "I'm a Computer Science graduate of the Arab Academy for Science & Technology, focused on AI and Machine Learning. I love taking research ideas — Siamese networks, reinforcement learning, multimodal LLMs — and turning them into things people can actually use.",
+    "I just submitted Payramid, my graduation project: a blockchain payroll layer that settles on Egypt's national payment rails with cryptographically verifiable proofs of payment. Before that I built Jarvis, a modular AI assistant with code generation, voice, and vision; interned at Dell Technologies; and completed a 7-month Microsoft ML Engineering program with DEPI.",
     "When I'm not training models, I mentor students, contribute to open-source, and chase down whatever new paper has caught my eye.",
   ],
   availability: 'Open to AI/ML roles',
   location: 'Cairo, Egypt',
-  resumeUrl:
-    'https://studentaast-my.sharepoint.com/:b:/g/personal/n_ahmed07645_student_aast_edu/Ef3CNu2TNDtOp2Tyq_giDcUBptgLR1LH2j_MdZep0ELqYg?e=FsUVjg',
+  resumeUrl: 'Nada-Mohamed-CV.pdf',
 };
 
 export const socials: SocialLink[] = [

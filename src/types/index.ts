@@ -30,6 +30,7 @@ export interface Project {
   highlights: string[];
   tech: string[];
   status?: 'ongoing' | 'shipped' | 'archived';
+  featured?: boolean;
   link?: string;
   repo?: string;
 }

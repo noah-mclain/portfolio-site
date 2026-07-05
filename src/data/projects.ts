@@ -2,6 +2,21 @@ import type { Project } from '@/types';
 
 export const projects: Project[] = [
   {
+    name: 'Payramid',
+    tagline: 'Blockchain payroll on Egypt’s national rails',
+    description:
+      'My graduation project: a blockchain-based payroll-orchestration and immutable-audit layer that lets employers disburse salaries instantly with cryptographically verifiable proofs of payment — settling on Egypt’s national rails (InstaPay, Meeza, ACH) within local banking and data-protection regulation.',
+    highlights: [
+      'Hyperledger Fabric chaincode (Go) on a 3-org RAFT network with MAJORITY endorsement, validated by 91 automated tests covering serialization integrity, double-spend prevention, and a full STRIDE threat model',
+      'Offline reach via encrypted SMS relay — one-time withdrawal codes for feature phones — plus non-custodial wallets using Privy threshold (MPC) key management',
+      'Authored the complete IEEE 830 SRS and IEEE 829 test plan',
+    ],
+    tech: ['Go', 'Hyperledger Fabric', 'TypeScript', 'Privy MPC', 'Twilio', 'Docker'],
+    status: 'ongoing',
+    featured: true,
+    repo: 'https://github.com/Payramid/Payramid-V1',
+  },
+  {
     name: 'Jarvis AI Assistant',
     tagline: 'Modular multimodal AI assistant',
     description:

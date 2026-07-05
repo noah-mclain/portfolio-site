@@ -4,7 +4,7 @@ export const skillGroups: SkillGroup[] = [
   {
     category: 'Languages',
     icon: 'code',
-    skills: ['Python', 'Java', 'C / C++', 'JavaScript', 'TypeScript', 'PHP', 'R', 'SQL'],
+    skills: ['Python', 'Go', 'Java', 'C / C++', 'JavaScript', 'TypeScript', 'PHP', 'R', 'SQL'],
   },
   {
     category: 'AI / ML Frameworks',
@@ -26,7 +26,7 @@ export const skillGroups: SkillGroup[] = [
   {
     category: 'Engineering',
     icon: 'wrench',
-    skills: ['Git', 'Docker', 'Kubernetes', 'AWS RDS', 'MySQL', 'SDLC', 'Tkinter'],
+    skills: ['Hyperledger Fabric', 'Git', 'Docker', 'Kubernetes', 'AWS RDS', 'MySQL', 'SDLC', 'Tkinter'],
   },
   {
     category: 'Soft Skills',

@@ -28,7 +28,7 @@ export function Contact() {
             <Button as="a" href="mailto:nadamo.cs@gmail.com" variant="primary" size="md">
               Email me
             </Button>
-            <Button as="a" href={profile.resumeUrl} target="_blank" rel="noreferrer" variant="secondary" size="md" iconLeft={<Download size={16} />}>
+            <Button as="a" href={profile.resumeUrl} download="Nada-Mohamed-CV.pdf" variant="secondary" size="md" iconLeft={<Download size={16} />}>
               Download CV
             </Button>
           </div>
