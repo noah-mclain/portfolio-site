@@ -1,6 +1,8 @@
-# nnaddaa.me
+# portfolio-site
 
 Personal portfolio for Nada Mohamed — AI/ML Engineer.
+
+Live at [noah-mclain.github.io/portfolio-site](https://noah-mclain.github.io/portfolio-site/).
 
 ## Stack
 
@@ -55,6 +57,4 @@ Breakpoints (mobile-first):
 
 ## Deployment
 
-Pushes to `main` build and deploy to GitHub Pages via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
-
-In your repo settings, set **Pages → Source → GitHub Actions**.
+Hosted on GitHub Pages at [noah-mclain.github.io/portfolio-site](https://noah-mclain.github.io/portfolio-site/). Every push to `main` builds and deploys automatically via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) (Pages source is set to **GitHub Actions** in the repo settings).
