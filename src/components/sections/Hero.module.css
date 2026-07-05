@@ -4,7 +4,7 @@
   min-height: 100dvh;
   display: flex;
   align-items: center;
-  padding-top: 80px;
+  padding-top: 88px;
   overflow: hidden;
   scroll-margin-top: 0;
 }
@@ -33,14 +33,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: var(--space-8);
+  padding-block: var(--space-10);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: var(--space-5);
   text-align: center;
-  padding-block: var(--space-12);
 }
 
 .pillRow {
   display: flex;
-  justify-content: center;
 }
 
 .headline {
@@ -48,9 +54,8 @@
   font-size: var(--text-5xl);
   font-weight: 700;
   letter-spacing: -0.035em;
-  line-height: 1;
+  line-height: 1.02;
   color: var(--color-text);
-  max-width: 16ch;
 }
 
 .name {
@@ -69,7 +74,7 @@
 }
 
 .tagline {
-  max-width: 56ch;
+  max-width: 52ch;
   font-size: var(--text-lg);
   color: var(--color-text-muted);
   line-height: 1.65;
@@ -78,9 +83,37 @@
 .actions {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: var(--space-4);
   margin-top: var(--space-4);
+}
+
+/* ---- Portrait ---- */
+
+.portraitWrap {
+  position: relative;
+  width: min(68vw, 300px);
+}
+
+.portraitGlow {
+  position: absolute;
+  inset: 8% -6% -4% -6%;
+  background: radial-gradient(ellipse at 50% 40%, var(--color-accent-bg-strong), transparent 70%);
+  filter: blur(28px);
+  z-index: -1;
+}
+
+.portrait {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius-xl, 24px);
+  border: 1px solid var(--glass-border-strong);
+  box-shadow:
+    var(--glass-shadow),
+    0 24px 60px -24px var(--color-accent-glow),
+    inset 0 1px 0 var(--glass-highlight);
 }
 
 .scrollHint {
@@ -112,11 +145,41 @@
   100% { transform: translateY(12px) scaleY(1); opacity: 0; }
 }
 
+/* ---- Split layout on wide screens ---- */
+
+@media (min-width: 900px) {
+  .inner {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .content {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .tagline {
+    max-width: 46ch;
+  }
+
+  .portraitWrap {
+    width: min(34vw, 400px);
+    justify-self: center;
+    /* A touch of asymmetry so the layout doesn't feel templated. */
+    rotate: 1.5deg;
+  }
+}
+
 @media (max-width: 600px) {
   .actions {
     width: 100%;
+    flex-direction: column;
   }
-  .actions > * {
-    flex: 1;
+  /* The hero fills small screens edge-to-edge; the hint would collide
+     with the CTA buttons — and the mobile dock lives there anyway. */
+  .scrollHint {
+    display: none;
   }
 }

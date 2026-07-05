@@ -36,12 +36,32 @@
 }
 
 .title {
+  position: relative;
   font-family: var(--font-display);
   font-size: var(--text-4xl);
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.05;
   color: var(--color-text);
+  padding-bottom: var(--space-3);
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56px;
+  height: 3px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-soft));
+  box-shadow: 0 0 12px var(--color-accent-glow);
+}
+
+.left .title::after {
+  left: 0;
+  transform: none;
 }
 
 .description {
