@@ -21,8 +21,39 @@
   line-height: 1.55;
 }
 
-.facts {
+.aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
   align-self: center;
+}
+
+.certsTitle {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: var(--space-4);
+}
+
+.certList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.certName {
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.certIssuer {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: 2px;
 }
 
 .factList {
