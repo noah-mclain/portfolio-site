@@ -58,3 +58,13 @@ Breakpoints (mobile-first):
 ## Deployment
 
 Hosted on GitHub Pages at [noah-mclain.github.io/portfolio-site](https://noah-mclain.github.io/portfolio-site/). Every push to `main` builds and deploys automatically via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) (Pages source is set to **GitHub Actions** in the repo settings).
+
+### Docker
+
+For hosting anywhere else, the site ships as a container (multi-stage build → nginx):
+
+```bash
+docker compose up --build   # serves on http://localhost:8080
+```
+
+or `docker build -t portfolio . && docker run -p 8080:80 portfolio`.
