@@ -42,12 +42,6 @@ export const socials: SocialLink[] = [
     handle: '+20 120 036 9051',
     icon: 'phone',
   },
-  {
-    label: 'CodeForces',
-    href: 'https://codeforces.com/profile/._noah_.',
-    handle: '._noah_.',
-    icon: 'codeforces',
-  },
 ];
 
 export const navLinks: NavLink[] = [

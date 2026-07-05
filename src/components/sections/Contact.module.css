@@ -45,70 +45,66 @@
 
 .socials {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-  border-top: 1px solid var(--color-border);
-  padding-top: var(--space-4);
-}
-
-.socialRow {
-  display: grid;
-  grid-template-columns: 24px 1fr 16px;
-  align-items: center;
+  flex-wrap: wrap;
   gap: var(--space-3);
-  padding: var(--space-3);
-  border-radius: var(--radius-md);
-  transition: background var(--duration-base) var(--ease-out);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-5);
 }
 
-.socialRow:hover {
-  background: var(--glass-bg-strong);
-}
-
-.socialIcon {
+.socialBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  color: var(--color-text-muted);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  transition:
+    color var(--duration-base) var(--ease-out),
+    background var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.socialBtn:hover {
   color: var(--color-accent-soft);
+  background: var(--color-accent-bg-strong);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
 }
 
-.socialLabel {
-  display: none;
+.socialBtn {
+  position: relative;
 }
 
-.socialHandle {
-  font-size: var(--text-sm);
+/* Name label that fades in above the icon after the pointer lingers. */
+.socialBtn::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-bg) 80%, transparent);
+  border: 1px solid var(--glass-border-strong);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   color: var(--color-text);
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
   white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s var(--ease-out);
 }
 
-@media (min-width: 480px) {
-  .socialRow {
-    grid-template-columns: 24px 100px 1fr 16px;
-  }
-  .socialLabel {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-  .socialHandle {
-    text-align: right;
-  }
-}
-
-.socialArrow {
-  color: var(--color-text-subtle);
-  transition: color var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out);
-}
-
-.socialRow:hover .socialArrow {
-  color: var(--color-accent);
-  transform: translate(2px, -2px);
+.socialBtn:hover::after,
+.socialBtn:focus-visible::after {
+  opacity: 1;
+  transition-delay: 2s;
 }
 
 .aside {

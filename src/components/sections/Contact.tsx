@@ -1,4 +1,4 @@
-import { ArrowUpRight, Download, Sparkles } from 'lucide-react';
+import { Download, Sparkles } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -22,7 +22,7 @@ export function Contact() {
             <h3>Get in touch</h3>
           </div>
           <p className={styles.ctaText}>
-            The fastest way to reach me is email. For everything else — code, conversations, weird ideas — pick a channel below.
+            The fastest way to reach me is email. For everything else — code, conversations, weird ideas — every channel is an icon away.
           </p>
           <div className={styles.ctaActions}>
             <Button as="a" href="mailto:nadamo.cs@gmail.com" variant="primary" size="md">
@@ -33,21 +33,18 @@ export function Contact() {
             </Button>
           </div>
 
-          <ul className={styles.socials}>
+          <ul className={styles.socials} aria-label="Social links">
             {socials.map((social) => (
               <li key={social.label}>
                 <a
                   href={social.href}
-                  className={styles.socialRow}
+                  className={styles.socialBtn}
+                  aria-label={social.label}
+                  data-label={social.label}
                   target={social.href.startsWith('http') ? '_blank' : undefined}
                   rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 >
-                  <span className={styles.socialIcon}>
-                    <SocialIcon icon={social.icon} size={16} />
-                  </span>
-                  <span className={styles.socialLabel}>{social.label}</span>
-                  <span className={styles.socialHandle}>{social.handle}</span>
-                  <ArrowUpRight size={14} className={styles.socialArrow} />
+                  <SocialIcon icon={social.icon} size={19} />
                 </a>
               </li>
             ))}
