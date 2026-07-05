@@ -36,12 +36,6 @@ export const socials: SocialLink[] = [
     handle: 'nada-mohamed',
     icon: 'linkedin',
   },
-  {
-    label: 'Phone',
-    href: 'tel:+201200369051',
-    handle: '+20 120 036 9051',
-    icon: 'phone',
-  },
 ];
 
 export const navLinks: NavLink[] = [
