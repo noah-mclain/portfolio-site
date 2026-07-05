@@ -2,26 +2,27 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './CircuitBackground.module.css';
 
 /**
- * Scroll-reactive circuit board that etches itself behind the page,
- * styled after a real PCB: traces run on a fixed grid, mostly straight
- * with 45°/90° bends, never cross (an occupancy grid reserves cells),
- * and terminate in hollow ring pads with the occasional solder dot.
+ * Scroll-reactive circuit board that etches itself behind the page, styled
+ * after a real PCB: long straight runs on a 16px grid, brief 45° jogs, and
+ * hollow ring pads at trace ends. New traces branch off the existing net at
+ * junction dots, so the whole board grows as one connected circuit instead
+ * of scattered squiggles. An occupancy grid keeps traces from crossing.
  *
- * The drawing budget each frame scales with scroll velocity: fast
- * scrolling routes traces quickly, idling lets the board build almost
- * imperceptibly. Drawing is incremental onto a persistent canvas — each
- * frame strokes only the new pixels, so per-frame cost stays tiny.
+ * The drawing budget each frame scales with scroll velocity: fast scrolling
+ * routes traces quickly, idling lets the board build almost imperceptibly.
+ * Drawing is incremental onto a persistent canvas — each frame strokes only
+ * the new pixels, so per-frame cost stays tiny.
  */
 
-const GRID = 20;
-const MAX_WALKERS = 5;
+const GRID = 16;
+const MAX_WALKERS = 6;
 const IDLE_BUDGET = 0.4; // px per frame when the page is still
 const SCROLL_GAIN = 1.1; // extra px per frame per px/frame of scroll speed
-const MAX_BUDGET = 160;
-const FILL_RATIO = 0.22; // fraction of grid cells that ends up traced
+const MAX_BUDGET = 170;
+const FILL_RATIO = 0.3; // fraction of grid cells that ends up traced
+const MIN_RUN = 3; // cells to travel straight before another bend is allowed
 
-// 8 compass directions. Preference order keeps runs straight with
-// occasional 45° bends, like PCB routing.
+// 8 compass directions; even indices are orthogonal, odd are diagonal.
 const DIRS = [
   [1, 0],
   [1, 1],
@@ -38,12 +39,16 @@ interface Walker {
   cx: number;
   cy: number;
   dir: number;
-  /** Target cell of the move in progress, or null while idle. */
+  /** Target cell of the move in progress. */
   tx: number;
   ty: number;
   /** 0..1 progress along the current move. */
   t: number;
   moving: boolean;
+  /** Cells travelled since the last bend. */
+  run: number;
+  /** Cells left before this trace ends in a pad. */
+  remaining: number;
 }
 
 function createRenderer(canvas: HTMLCanvasElement) {
@@ -55,53 +60,107 @@ function createRenderer(canvas: HTMLCanvasElement) {
   let drawn = 0;
   let cap = 0;
   let occupied = new Set<number>();
+  let net: number[] = []; // cells already traced, sampled for branching
   let walkers: Walker[] = [];
 
   const key = (cx: number, cy: number) => cy * 4096 + cx;
   const px = (c: number) => c * GRID + GRID / 2;
   const free = (cx: number, cy: number) =>
-    cx >= 0 && cy >= 0 && cx < cols && cy < rows && !occupied.has(key(cx, cy));
+    cx >= 1 && cy >= 1 && cx < cols - 1 && cy < rows - 1 && !occupied.has(key(cx, cy));
+
+  function claim(cx: number, cy: number) {
+    occupied.add(key(cx, cy));
+    net.push(key(cx, cy));
+  }
 
   function ringPad(cx: number, cy: number) {
     ctx!.beginPath();
-    ctx!.arc(px(cx), px(cy), 3.4, 0, Math.PI * 2);
+    ctx!.arc(px(cx), px(cy), 3.2, 0, Math.PI * 2);
     ctx!.stroke();
   }
 
-  function dotPad(cx: number, cy: number) {
+  function junctionDot(cx: number, cy: number) {
     ctx!.beginPath();
-    ctx!.arc(px(cx), px(cy), 2, 0, Math.PI * 2);
+    ctx!.arc(px(cx), px(cy), 1.8, 0, Math.PI * 2);
     ctx!.fill();
   }
 
+  function initWalker(w: Walker, cx: number, cy: number, dir: number) {
+    Object.assign(w, {
+      cx,
+      cy,
+      dir,
+      t: 0,
+      moving: false,
+      run: MIN_RUN, // free to bend right away
+      remaining: 10 + Math.floor(Math.random() * 26),
+    });
+  }
+
+  /** Start a new trace: usually branching off the net, sometimes an island. */
   function spawn(w: Walker): boolean {
+    if (net.length > 0 && Math.random() < 0.9) {
+      for (let tries = 0; tries < 30; tries++) {
+        const k = net[Math.floor(Math.random() * net.length)];
+        const cx = k % 4096;
+        const cy = Math.floor(k / 4096);
+        const dirs = [0, 2, 4, 6].sort(() => Math.random() - 0.5);
+        for (const dir of dirs) {
+          const [dx, dy] = DIRS[dir];
+          if (free(cx + dx, cy + dy)) {
+            junctionDot(cx, cy);
+            initWalker(w, cx, cy, dir);
+            return true;
+          }
+        }
+      }
+    }
     for (let tries = 0; tries < 24; tries++) {
       const cx = 1 + Math.floor(Math.random() * (cols - 2));
       const cy = 1 + Math.floor(Math.random() * (rows - 2));
       if (!free(cx, cy)) continue;
-      occupied.add(key(cx, cy));
-      Object.assign(w, { cx, cy, dir: Math.floor(Math.random() * 8), t: 0, moving: false });
+      claim(cx, cy);
       ringPad(cx, cy);
+      initWalker(w, cx, cy, [0, 2, 4, 6][Math.floor(Math.random() * 4)]);
       return true;
     }
     return false;
   }
 
-  /** Pick the next cell: prefer straight, then 45° bends, then 90°. */
+  /**
+   * Pick the next cell, PCB-style: hold a straight line, occasionally take a
+   * 45° bend; a diagonal leg snaps back to orthogonal at the first chance so
+   * diagonals read as short jogs and lane changes, not wandering.
+   */
   function route(w: Walker): boolean {
-    const turns = Math.random() < 0.72 ? [0, 1, -1, 2, -2] : [1, -1, 0, 2, -2];
-    for (const turn of turns) {
-      const dir = (w.dir + turn + 8) % 8;
+    if (w.remaining <= 0) return false;
+
+    const onDiagonal = w.dir % 2 === 1;
+    let order: number[];
+    if (onDiagonal) {
+      const snap = Math.random() < 0.5 ? [w.dir + 1, w.dir - 1] : [w.dir - 1, w.dir + 1];
+      order = w.run >= 1 ? [...snap, w.dir] : [w.dir, ...snap];
+    } else if (w.run < MIN_RUN) {
+      order = [w.dir];
+    } else {
+      const roll = Math.random();
+      if (roll < 0.78) order = [w.dir, w.dir + 1, w.dir - 1];
+      else if (roll < 0.89) order = [w.dir + 1, w.dir, w.dir - 1];
+      else order = [w.dir - 1, w.dir, w.dir + 1];
+    }
+
+    for (const raw of order) {
+      const dir = (raw + 8) % 8;
       const [dx, dy] = DIRS[dir];
-      if (free(w.cx + dx, w.cy + dy)) {
-        w.dir = dir;
-        w.tx = w.cx + dx;
-        w.ty = w.cy + dy;
-        w.t = 0;
-        w.moving = true;
-        occupied.add(key(w.tx, w.ty));
-        return true;
-      }
+      if (!free(w.cx + dx, w.cy + dy)) continue;
+      w.run = dir === w.dir ? w.run + 1 : 0;
+      w.dir = dir;
+      w.tx = w.cx + dx;
+      w.ty = w.cy + dy;
+      w.t = 0;
+      w.moving = true;
+      claim(w.tx, w.ty);
+      return true;
     }
     return false;
   }
@@ -119,13 +178,14 @@ function createRenderer(canvas: HTMLCanvasElement) {
     const accent = style.getPropertyValue('--color-accent').trim() || '#a78bfa';
     ctx!.strokeStyle = accent;
     ctx!.fillStyle = accent;
-    ctx!.lineWidth = 1.1;
+    ctx!.lineWidth = 1;
     ctx!.lineCap = 'round';
     ctx!.globalAlpha = 0.15;
 
     cols = Math.ceil(width / GRID);
     rows = Math.ceil(height / GRID);
     occupied = new Set();
+    net = [];
     drawn = 0;
     cap = cols * rows * FILL_RATIO * GRID;
     walkers = [];
@@ -147,9 +207,8 @@ function createRenderer(canvas: HTMLCanvasElement) {
 
         if (!w.moving) {
           if (!route(w)) {
-            // Dead end: cap the trace with a pad and restart elsewhere.
-            if (Math.random() < 0.3) dotPad(w.cx, w.cy);
-            else ringPad(w.cx, w.cy);
+            // Trace complete (or boxed in): cap it with a pad, branch anew.
+            ringPad(w.cx, w.cy);
             if (!spawn(w)) remaining = 0; // board is saturated
             continue;
           }
@@ -172,11 +231,7 @@ function createRenderer(canvas: HTMLCanvasElement) {
           w.cx = w.tx;
           w.cy = w.ty;
           w.moving = false;
-          // Occasionally end the trace on purpose so pads pepper the board.
-          if (Math.random() < 0.045) {
-            ringPad(w.cx, w.cy);
-            if (!spawn(w)) remaining = 0;
-          }
+          w.remaining--;
         }
       }
     }
