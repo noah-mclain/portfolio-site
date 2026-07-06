@@ -9,6 +9,7 @@ import { Skills } from '@/components/sections/Skills';
 import { Experience } from '@/components/sections/Experience';
 import { Projects } from '@/components/sections/Projects';
 import { Contact } from '@/components/sections/Contact';
+import { AllProjects } from '@/components/sections/AllProjects';
 
 // Decorative only — fetched and mounted once the main thread is idle so it
 // never competes with first paint.
@@ -27,8 +28,29 @@ function useIdleMount() {
   return ready;
 }
 
+/**
+ * Tiny hash router: `#/projects` shows the archive, anything else the main
+ * page. Hash routing keeps back/forward working on GitHub Pages without a
+ * server-side fallback.
+ */
+function useHashRoute() {
+  const [hash, setHash] = useState(window.location.hash);
+  useEffect(() => {
+    const onChange = () => setHash(window.location.hash);
+    window.addEventListener('hashchange', onChange);
+    return () => window.removeEventListener('hashchange', onChange);
+  }, []);
+  return hash;
+}
+
 export default function App() {
   const idle = useIdleMount();
+  const hash = useHashRoute();
+  const isArchive = hash === '#/projects';
+
+  useEffect(() => {
+    if (isArchive) window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+  }, [isArchive]);
 
   return (
     <>
@@ -41,12 +63,18 @@ export default function App() {
       <Navbar />
       <SocialRail />
       <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Contact />
+        {isArchive ? (
+          <AllProjects />
+        ) : (
+          <>
+            <Hero />
+            <About />
+            <Skills />
+            <Experience />
+            <Projects />
+            <Contact />
+          </>
+        )}
       </main>
       <Footer />
     </>

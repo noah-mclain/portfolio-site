@@ -1,8 +1,9 @@
-import { ArrowUpRight, Github } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Github } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { Pill } from '@/components/ui/Pill';
-import { projects } from '@/data/projects';
+import { Button } from '@/components/ui/Button';
+import { spotlightProjects } from '@/data/projects';
 import type { Project } from '@/types';
 import styles from './Projects.module.css';
 
@@ -18,10 +19,10 @@ export function Projects() {
       id="projects"
       eyebrow="Selected work"
       title="Projects I've built"
-      description="A handful of the things I've shipped or am still pushing on — across blockchain payments, AI agents, computer vision, RL, and developer tooling."
+      description="Current favourites — the full archive is one click away."
     >
       <div className={styles.grid}>
-        {projects.map((project, i) => (
+        {spotlightProjects.map((project, i) => (
           <Card
             key={project.name}
             interactive={Boolean(project.link || project.repo)}
@@ -32,6 +33,7 @@ export function Projects() {
               <div>
                 <h3 className={styles.name}>{project.name}</h3>
                 <p className={styles.tagline}>{project.tagline}</p>
+                {project.period && <p className={styles.period}>{project.period}</p>}
               </div>
               {project.status && (
                 <Pill tone={project.status === 'ongoing' ? 'accent' : 'muted'} dot={project.status === 'ongoing'}>
@@ -72,6 +74,12 @@ export function Projects() {
             )}
           </Card>
         ))}
+      </div>
+
+      <div className={`${styles.more} reveal`} data-delay="1">
+        <Button as="a" href="#/projects" variant="secondary" size="md" iconRight={<ArrowRight size={16} />}>
+          View all projects
+        </Button>
       </div>
     </Section>
   );

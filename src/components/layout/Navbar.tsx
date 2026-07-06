@@ -53,12 +53,19 @@ export function Navbar() {
     const handle = () => {
       setScrolled(window.scrollY > 16);
       // The mobile dock stays out of the way until the hero (with its own
-      // pill-shaped CTAs) is mostly gone.
-      setPastHero(window.scrollY > window.innerHeight * 0.5);
+      // pill-shaped CTAs) is mostly gone. Subpages have no hero, so it
+      // shows right away there.
+      setPastHero(
+        window.location.hash.startsWith('#/') || window.scrollY > window.innerHeight * 0.5,
+      );
     };
     handle();
     window.addEventListener('scroll', handle, { passive: true });
-    return () => window.removeEventListener('scroll', handle);
+    window.addEventListener('hashchange', handle);
+    return () => {
+      window.removeEventListener('scroll', handle);
+      window.removeEventListener('hashchange', handle);
+    };
   }, []);
 
   // Native listener: React synthesizes mouseleave from mouseout pairs, which
