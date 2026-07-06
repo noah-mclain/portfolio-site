@@ -3,6 +3,7 @@ import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { Pill } from '@/components/ui/Pill';
 import { projects } from '@/data/projects';
+import { trackEvent } from '@/lib/analytics';
 import styles from './AllProjects.module.css';
 
 /** The full project archive, reachable at #/projects. */
@@ -35,6 +36,7 @@ export function AllProjects() {
                 className={styles.previewLink}
                 aria-label={`${project.name} repository`}
                 tabIndex={-1}
+                onClick={() => trackEvent(`project_preview_${project.name}`)}
               >
                 <img
                   src={project.image}
@@ -67,12 +69,24 @@ export function AllProjects() {
             {(project.link || project.repo) && (
               <div className={styles.links}>
                 {project.link && (
-                  <a href={project.link} className={styles.linkBtn} target="_blank" rel="noreferrer">
+                  <a
+                    href={project.link}
+                    className={styles.linkBtn}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => trackEvent(`project_live_${project.name}`)}
+                  >
                     Live <ArrowUpRight size={14} />
                   </a>
                 )}
                 {project.repo && (
-                  <a href={project.repo} className={styles.linkBtn} target="_blank" rel="noreferrer">
+                  <a
+                    href={project.repo}
+                    className={styles.linkBtn}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => trackEvent(`project_repo_${project.name}`)}
+                  >
                     <Github size={14} /> Code
                   </a>
                 )}

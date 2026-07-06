@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/Button';
 import { SocialIcon } from '@/components/ui/SocialIcon';
 import { profile, socials } from '@/data/profile';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { trackEvent } from '@/lib/analytics';
 import styles from './Contact.module.css';
 
 /**
@@ -27,7 +28,13 @@ export function Contact() {
         </p>
 
         <div className={`${styles.actions} reveal`} data-delay="3">
-          <Button as="a" href="mailto:nadamo.cs@gmail.com" variant="primary" size="lg">
+          <Button
+            as="a"
+            href="mailto:nadamo.cs@gmail.com"
+            variant="primary"
+            size="lg"
+            onClick={() => trackEvent('email_click')}
+          >
             Email me
           </Button>
           <Button
@@ -38,6 +45,7 @@ export function Contact() {
             variant="secondary"
             size="lg"
             iconLeft={<FileText size={18} />}
+            onClick={() => trackEvent('view_cv')}
           >
             View CV
           </Button>
@@ -60,6 +68,7 @@ export function Contact() {
                 data-label={social.label}
                 target={social.href.startsWith('http') ? '_blank' : undefined}
                 rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                onClick={() => trackEvent(`social_${social.icon}_click`)}
               >
                 <SocialIcon icon={social.icon} size={19} />
               </a>

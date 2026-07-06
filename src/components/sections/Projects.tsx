@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/Card';
 import { Pill } from '@/components/ui/Pill';
 import { Button } from '@/components/ui/Button';
 import { spotlightProjects } from '@/data/projects';
+import { trackEvent } from '@/lib/analytics';
 import type { Project } from '@/types';
 import styles from './Projects.module.css';
 
@@ -61,12 +62,24 @@ export function Projects() {
             {(project.link || project.repo) && (
               <div className={styles.links}>
                 {project.link && (
-                  <a href={project.link} className={styles.linkBtn} target="_blank" rel="noreferrer">
+                  <a
+                    href={project.link}
+                    className={styles.linkBtn}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => trackEvent(`project_live_${project.name}`)}
+                  >
                     Live <ArrowUpRight size={14} />
                   </a>
                 )}
                 {project.repo && (
-                  <a href={project.repo} className={styles.linkBtn} target="_blank" rel="noreferrer">
+                  <a
+                    href={project.repo}
+                    className={styles.linkBtn}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => trackEvent(`project_repo_${project.name}`)}
+                  >
                     <Github size={14} /> Code
                   </a>
                 )}
@@ -77,7 +90,14 @@ export function Projects() {
       </div>
 
       <div className={`${styles.more} reveal`} data-delay="1">
-        <Button as="a" href="#/projects" variant="secondary" size="md" iconRight={<ArrowRight size={16} />}>
+        <Button
+          as="a"
+          href="#/projects"
+          variant="secondary"
+          size="md"
+          iconRight={<ArrowRight size={16} />}
+          onClick={() => trackEvent('view_all_projects')}
+        >
           View all projects
         </Button>
       </div>

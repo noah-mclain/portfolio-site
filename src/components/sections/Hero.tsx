@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/Button';
 import { Pill } from '@/components/ui/Pill';
 import { profile } from '@/data/profile';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { trackEvent } from '@/lib/analytics';
 import portrait from '@/assets/portrait.png';
 import styles from './Hero.module.css';
 
@@ -37,7 +38,16 @@ export function Hero() {
             <Button as="a" href="#projects" variant="primary" size="lg" iconRight={<ArrowRight size={18} />}>
               View my work
             </Button>
-            <Button as="a" href={profile.resumeUrl} target="_blank" rel="noreferrer" variant="secondary" size="lg" iconLeft={<FileText size={18} />}>
+            <Button
+              as="a"
+              href={profile.resumeUrl}
+              target="_blank"
+              rel="noreferrer"
+              variant="secondary"
+              size="lg"
+              iconLeft={<FileText size={18} />}
+              onClick={() => trackEvent('view_cv')}
+            >
               View CV
             </Button>
           </div>
