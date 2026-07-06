@@ -176,7 +176,9 @@
   transition-delay: 2s;
 }
 
-@media (min-width: 1024px) {
+/* Matches the desktop nav pill's breakpoint so the rail exists wherever
+   the dock doesn't. */
+@media (min-width: 768px) {
   .rail {
     display: flex;
   }

@@ -136,7 +136,7 @@
   transition-delay: 2s;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .railHint {
     display: inline-flex;
   }
