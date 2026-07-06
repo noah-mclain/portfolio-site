@@ -17,10 +17,19 @@ export interface SocialLink {
   icon: 'github' | 'linkedin' | 'mail' | 'phone' | 'codeforces' | 'twitter';
 }
 
-export interface SkillGroup {
-  category: string;
-  icon: 'code' | 'brain' | 'wrench' | 'sparkles' | 'users';
-  skills: string[];
+export type SkillTag =
+  | 'Programming Languages'
+  | 'Machine Learning & AI'
+  | 'Frameworks & Libraries'
+  | 'Backend'
+  | 'Frontend'
+  | 'Database'
+  | 'Cloud & DevOps'
+  | 'Professional Skills';
+
+export interface Skill {
+  name: string;
+  tags: SkillTag[];
 }
 
 export interface Project {
@@ -31,6 +40,12 @@ export interface Project {
   tech: string[];
   status?: 'ongoing' | 'shipped' | 'archived';
   featured?: boolean;
+  /** Shown on the home page's selected-work grid. */
+  spotlight?: boolean;
+  /** Human-readable timeframe, e.g. "Nov 2024 – Feb 2025". */
+  period?: string;
+  /** Preview screenshot URL (links to the repo when clicked). */
+  image?: string;
   link?: string;
   repo?: string;
 }
