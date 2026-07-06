@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/Button';
 import { Pill } from '@/components/ui/Pill';
 import { profile } from '@/data/profile';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import portrait from '@/assets/portrait.jpg';
+import portrait from '@/assets/portrait.png';
 import styles from './Hero.module.css';
 
 export function Hero() {
