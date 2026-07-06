@@ -6,7 +6,7 @@
 .inner {
   display: flex;
   flex-direction: column;
-  gap: clamp(2.5rem, 5vw, 4.5rem);
+  gap: clamp(1.75rem, 5vw, 4.5rem);
 }
 
 .header {
