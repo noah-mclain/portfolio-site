@@ -19,12 +19,6 @@ export const profile: Profile = {
 
 export const socials: SocialLink[] = [
   {
-    label: 'Email',
-    href: 'mailto:nadamo.cs@gmail.com',
-    handle: 'nadamo.cs@gmail.com',
-    icon: 'mail',
-  },
-  {
     label: 'GitHub',
     href: 'https://github.com/noah-mclain',
     handle: 'noah-mclain',

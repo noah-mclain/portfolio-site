@@ -1,7 +1,4 @@
 .outro {
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
   scroll-margin-top: 72px;
   padding-block: var(--section-gap);
 }

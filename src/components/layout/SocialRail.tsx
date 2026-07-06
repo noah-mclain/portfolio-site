@@ -15,15 +15,32 @@ import styles from './SocialRail.module.css';
 export function SocialRail() {
   const [open, setOpen] = useState(false);
 
+  // Check the outro's position on each scroll frame instead of holding an
+  // IntersectionObserver on the node: the outro remounts when the route
+  // changes, and an observer bound to the old node goes stale silently.
   useEffect(() => {
-    const outro = document.getElementById('contact');
-    if (!outro) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setOpen(entry.isIntersecting),
-      { threshold: 0.35 },
-    );
-    observer.observe(outro);
-    return () => observer.disconnect();
+    let raf = 0;
+    const check = () => {
+      raf = 0;
+      const outro = document.getElementById('contact');
+      if (!outro) {
+        setOpen(false);
+        return;
+      }
+      const rect = outro.getBoundingClientRect();
+      setOpen(rect.top < window.innerHeight * 0.7 && rect.bottom > window.innerHeight * 0.3);
+    };
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(check);
+    };
+    check();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('hashchange', schedule);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('hashchange', schedule);
+    };
   }, []);
 
   return (
