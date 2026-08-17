@@ -1,0 +1,7 @@
+# LaTeX build artifacts (the PDFs themselves are committed)
+*.aux
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz

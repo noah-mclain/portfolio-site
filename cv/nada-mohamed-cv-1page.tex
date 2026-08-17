@@ -1,0 +1,135 @@
+% Nada Mohamed -- one-page CV.
+%
+% Cut down from master-cv.tex for a role that may sit anywhere between AI/ML
+% engineering and teaching, so engineering depth leads and instruction runs
+% through it rather than being dropped.
+%
+% Project dates come from each repository's commit history. Payramid is kept
+% deliberately light on implementation detail -- the platform source is private.
+%
+% Build: pdflatex nada-mohamed-cv-1page.tex
+
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.45in]{geometry}
+\usepackage[compact]{nadacv}
+
+\hypersetup{
+  pdftitle={Nada Mohamed -- Curriculum Vitae},
+  pdfauthor={Nada Mohamed},
+}
+
+\begin{document}
+
+% ---------------------------------------------------------------------------
+\cvname{Nada Mohamed}
+
+\begin{cvcontacts}
+\cvcontact{\cvIconLocation}{Cairo, Egypt}\cvsep
+\cvcontact{\cvIconPhone}{\cvlink{tel:+201200369051}{+20 120 036 9051}}\cvsep
+\cvcontact{\cvIconMail}{\cvlink{mailto:nadamo.cs@gmail.com}{nadamo.cs@gmail.com}}\par
+\vspace{1.5pt}
+\cvcontact{\cvIconSite}{\cvlink{https://noah-mclain.github.io/portfolio-site/}{Portfolio}}\cvsep
+\cvcontact{\cvIconLinkedIn}{\cvlink{https://www.linkedin.com/in/nada-mohamed-300305ma}{Nada Mohamed}}\cvsep
+\cvcontact{\cvIconGitHub}{\cvlink{https://github.com/noah-mclain}{noah-mclain}}
+\end{cvcontacts}
+
+% ---------------------------------------------------------------------------
+\cvsection{Summary}
+
+Computer Science graduate (2026) specializing in Artificial Intelligence and
+Machine Learning, with an engineering background spanning intelligent agents,
+LLM fine-tuning, computer vision, full-stack development, and blockchain. Have
+shipped 15+ projects end to end and taught programming to 30+ students ---
+equally at home building systems and explaining them. Comfortable across the
+stack in Python, Go, Java, and C/C++.
+
+% ---------------------------------------------------------------------------
+\cvsection{Education}
+
+\cventry
+  {Arab Academy for Science, Technology \& Maritime Transport}{Sep 2022 -- Jun 2026}
+  {B.Sc. Computer Science (Dual Degree), Graduated with Honours -- GPA: 3.69 / 4.00}{Cairo, Egypt}
+\begin{cvitems}
+  \item Dual-degree program with the University of Northampton (UK). Coursework:
+        Machine Learning, Computer Vision, NLP, Algorithms \& Optimization,
+        Parallel Computing, Compilers, Databases, Robotics.
+\end{cvitems}
+
+% ---------------------------------------------------------------------------
+\cvsection{Experience}
+
+\cventry{Dell Technologies}{Aug 2025 -- Sept 2025}{Summer Intern}{Cairo, Egypt}
+\begin{cvitems}
+  \item Led the Academy Project from concept to business proposal, applying design
+        thinking to Dell's onboarding.
+  \item Completed workshops in front-end development, containerization (Docker,
+        Kubernetes), and software engineering practice.
+\end{cvitems}
+
+\cventry{DEPI -- Microsoft ML Engineering Curriculum}{Nov 2024 -- May 2025}{AI/ML Engineer Intern}{Zamalek, Egypt}
+\begin{cvitems}
+  \item Completed a 7-month intensive AI/ML program covering NLP, generative AI,
+        computer vision, and deployment.
+  \item Delivered milestone projects and a capstone integrating multimodal
+        workflows and agent orchestration.
+\end{cvitems}
+
+\cventry{Megz}{Aug 2020 -- Nov 2021}{Computer Science Instructor}{Cairo, Egypt}
+\begin{cvitems}
+  \item Taught programming fundamentals to 30+ students, improving proficiency in
+        Python and Java.
+  \item Supported the lead teacher in classroom management, grading, and student
+        progress tracking.
+  \item Mentored students in debugging and problem-solving; personalized guidance
+        improved small-group performance 20\%.
+\end{cvitems}
+
+% ---------------------------------------------------------------------------
+\cvsection{Selected Projects}
+
+\cvproject{Payramid --- Blockchain Payroll for Egypt}{\cvsite{https://payramid.github.io/}\,\cvrepo{https://github.com/payramid/payramid.github.io}}{Go, TypeScript, Blockchain, Docker \textperiodcentered{} \textit{Graduation Project}}{Sept 2025 -- Present}
+\begin{cvitems}
+  \item Payroll orchestration and immutable audit layer letting employers
+        disburse salaries over Egypt's national payment rails with verifiable
+        proofs of payment, within local banking and data-protection regulation.
+  \item Authored the thesis and the IEEE 830 SRS start to finish; currently
+        revising the accompanying research paper. Platform source is private ---
+        links go to the public landing page and its repository.
+\end{cvitems}
+
+\cvproject{Music Genre Detection}{\cvrepo{https://github.com/noah-mclain/music-genre-detection}}{Python, PyTorch, Librosa, Flask, Captum}{Dec 2025}
+\begin{cvitems}
+  \item CNN--LSTM attention model classifying audio into 10 genres from
+        mel-spectrograms, served through Flask.
+  \item Grad-CAM and Integrated Gradients explainability, a pytest suite with
+        coverage, and Sphinx API docs.
+\end{cvitems}
+
+\cvproject{Pixel Paradise}{\cvrepo{https://github.com/catsdisownedz/Pixel-Paradise}}{JavaScript, PHP, HTML/CSS, Python}{May 2024 -- Feb 2025}
+\begin{cvitems}
+  \item Retro browser arcade built with a small team over 126 commits: playable
+        games, user accounts and sessions, and score tracking behind a
+        handcrafted pixel-art interface. Core developer across gameplay and site
+        features.
+\end{cvitems}
+
+% ---------------------------------------------------------------------------
+\cvsection{Technical Skills}
+
+\cvskill{Languages}{Python, Go, Java, C/C++, JavaScript, TypeScript, PHP, Dart, R, Bash, SQL, HTML/CSS}
+\cvskill{AI / ML \& Data}{PyTorch, TensorFlow, Keras, Scikit-learn, NumPy, Pandas, OpenCV, Librosa, HuggingFace Transformers, Whisper; NLP, Generative AI \& LLM fine-tuning, Computer Vision, Reinforcement Learning, Explainable AI (SHAP, Grad-CAM)}
+\cvskill{Web \& Application}{Flask, FastAPI, React, Tailwind CSS, Vite, JavaFX, Tkinter, Flutter, SwiftUI, PyWebView}
+\cvskill{Systems, Cloud \& DevOps}{Docker, Kubernetes, Git, GitHub Actions (CI/CD), MySQL, AWS RDS, SQLite; parallel computing, compilers, algorithm design, Arduino}
+\cvskill{Blockchain \& Security}{Hyperledger Fabric, Chaincode (Go), X.509 PKI, cryptography, threshold (MPC) custody}
+\cvskill{Soft Skills}{Mentorship \& instruction, team collaboration, technical writing \& documentation, analytical thinking, communication, ownership}
+
+% ---------------------------------------------------------------------------
+\cvsection{Certifications, Awards \& Languages}
+
+\cvaward{\textbf{First Place, AI/ML Project Submission} -- AASTMT \cvsep \textbf{Microsoft ML Engineer Course} -- DEPI}
+\cvaward{\textbf{AI \& Machine Learning Course} -- Universitat Autònoma de Barcelona \cvsep \textbf{CS Camp} -- Carnegie Mellon University}
+\vspace{1pt}
+\textbf{Languages:} Arabic (Native) \cvsep English (Fluent) \cvsep Spanish (Intermediate)
+
+\end{document}

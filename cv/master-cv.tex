@@ -1,0 +1,260 @@
+% Nada Mohamed -- master CV (long form).
+%
+% This is the full record: every role, every project. Tailored variants are
+% cut down from here rather than written from scratch.
+%
+% Build: pdflatex master-cv.tex
+
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.55in]{geometry}
+\usepackage{nadacv}
+
+\hypersetup{
+  pdftitle={Nada Mohamed -- Curriculum Vitae},
+  pdfauthor={Nada Mohamed},
+}
+
+\begin{document}
+
+% ---------------------------------------------------------------------------
+\cvname{Nada Mohamed}
+
+\begin{cvcontacts}
+\cvcontact{\cvIconLocation}{Cairo, Egypt}\cvsep
+\cvcontact{\cvIconPhone}{\cvlink{tel:+201200369051}{+20 120 036 9051}}\cvsep
+\cvcontact{\cvIconMail}{\cvlink{mailto:nadamo.cs@gmail.com}{nadamo.cs@gmail.com}}\cvsep
+\cvcontact{\cvIconLinkedIn}{\cvlink{https://www.linkedin.com/in/nada-mohamed-300305ma}{nada-mohamed-300305ma}}\cvsep
+\cvcontact{\cvIconGitHub}{\cvlink{https://github.com/noah-mclain}{noah-mclain}}
+\end{cvcontacts}
+
+% ---------------------------------------------------------------------------
+\cvsection{Summary}
+
+Computer Science graduate (2026) specializing in Artificial Intelligence and
+Machine Learning, with a broad engineering background spanning intelligent
+agents, LLM fine-tuning, computer vision, full-stack development, blockchain,
+and high-performance computing. Have designed and shipped 15+ projects, from an
+award-winning facial-recognition system to a blockchain-based payroll
+microservice validated by 91 passing smart-contract tests. Comfortable across
+the stack in Python, Go, Java, and C/C++, and driven by turning research-grade
+ideas into practical, reliable software.
+
+% ---------------------------------------------------------------------------
+\cvsection{Education}
+
+\cventry
+  {Arab Academy for Science, Technology \& Maritime Transport}{Sep 2022 -- 2026}
+  {Bachelor of Computer Science (Dual Degree), Graduated with Honours -- Cumulative GPA: 3.69 / 4.00}{Cairo, Egypt}
+\begin{cvitems}
+  \item Dual-degree program in collaboration with the University of Northampton (UK).
+  \item Coursework: Machine Learning, Computer Vision, NLP, Algorithms \&
+        Optimization, Parallel Computing, Compilers, Databases, Robotics
+        Applications, Software Engineering (SDLC).
+\end{cvitems}
+
+% ---------------------------------------------------------------------------
+\cvsection{Technical Skills}
+
+\cvskill{Programming Languages}{Python, Java, C/C++, Go, JavaScript, TypeScript, Dart, PHP, R, Bash, SQL, HTML/CSS}
+\cvskill{AI / ML \& Data}{TensorFlow, PyTorch, Keras, Scikit-learn, NumPy, Pandas, OpenCV, Librosa, HuggingFace Transformers, Whisper; NLP, Generative AI \& LLM fine-tuning (DeepSeek-Coder, FLAN-UL2), Computer Vision, Reinforcement Learning, Explainable AI (SHAP, LIME, Grad-CAM)}
+\cvskill{Web \& Application}{Flask, FastAPI, React, Tailwind CSS, shadcn/ui, Vite, JavaFX, Tkinter, Flutter, SwiftUI, PyWebView}
+\cvskill{Blockchain \& Security}{Hyperledger Fabric, Chaincode (Go), Privy MPC / threshold custody, X.509 PKI, Cryptography}
+\cvskill{Data, Cloud \& DevOps}{MySQL, AWS RDS, SQLite, Docker, Kubernetes, Git, GitHub Actions (CI/CD), launchd}
+\cvskill{CS Foundations}{Algorithm design \& optimization, Data structures, Parallel computing, Compilers (lexing/parsing), Robotics \& embedded (Arduino), SDLC}
+\cvskill{APIs \& Tools}{Twilio, Groq, Pytest, Graphviz, \LaTeX}
+\cvskill{Soft Skills}{Team collaboration, Analytical thinking, Communication, Mentorship}
+
+% ---------------------------------------------------------------------------
+\cvsection{Experience}
+
+\cventry{Dell Technologies}{Aug 2025 -- Sept 2025}{Summer Intern}{Cairo, Egypt}
+\begin{cvitems}
+  \item Gained cross-department insight through sessions with Dell employees
+        across sales, pre-sales, and engineering roles.
+  \item Completed workshops on front-end development, containerization (Docker,
+        Kubernetes), and software engineering practices.
+  \item Applied design thinking to enhance Dell's onboarding experience;
+        shadowed a project manager and software engineer to learn daily workflows.
+  \item Led the Academy Project from concept to business proposal, strengthening
+        technical and collaboration skills.
+\end{cvitems}
+
+\cventry{DEPI -- Microsoft ML Engineering Curriculum}{Nov 2024 -- May 2025}{AI/ML Engineer Intern}{Zamalek, Egypt}
+\begin{cvitems}
+  \item Completed a 7-month intensive AI/ML engineering program (Microsoft ML
+        Engineering curriculum) covering NLP, generative AI, computer vision,
+        and model deployment.
+  \item Executed hands-on projects at each milestone and an end-to-end capstone
+        (Jarvis AI Assistant) integrating multimodal workflows and intelligent
+        agent orchestration.
+\end{cvitems}
+
+\cventry{Megz}{Aug 2020 -- Nov 2021}{Computer Science Instructor}{Cairo, Egypt}
+\begin{cvitems}
+  \item Assisted 30+ students with programming fundamentals, improving
+        proficiency in Python and Java.
+  \item Supported the lead teacher in managing classrooms, grading, and tracking
+        student progress; delivered personalized guidance that improved
+        small-group performance by 20\%.
+  \item Mentored students in debugging and problem-solving, fostering a
+        collaborative learning environment.
+\end{cvitems}
+
+% ---------------------------------------------------------------------------
+\cvsection{Projects}
+
+\cvproject{Payramid: Money Transaction Microservice}{}{Go, Hyperledger Fabric, Privy MPC, Twilio, TypeScript}{2025 -- 2026}
+\textit{\textbf{Graduation Project}}
+\begin{cvitems}
+  \item Built a blockchain-based payroll-orchestration and immutable-audit layer
+        enabling employers to disburse salaries instantly with cryptographically
+        verifiable proofs of payment, settling on Egypt's national rails
+        (InstaPay, Meeza, ACH) within banking (Law 194/2020) and data-protection
+        (Law 151/2020) regulation.
+  \item Engineered the smart-contract layer as Hyperledger Fabric chaincode (Go)
+        on a 3-organization RAFT network with MAJORITY endorsement; validated
+        with an automated Go suite of 91 passing tests (100\%) covering
+        serialization integrity, double-spend prevention, and a full STRIDE
+        threat model.
+  \item Delivered offline reach via encrypted SMS relay (one-time withdrawal
+        codes for feature phones) and non-custodial wallets using Privy
+        threshold (MPC) key management; authored the complete IEEE 830 SRS and
+        IEEE 829 test plan.
+\end{cvitems}
+
+\cvgroup{Artificial Intelligence \& Machine Learning}
+
+\cvproject{Jarvis AI Assistant}{\cvrepo{https://github.com/noah-mclain/Jarvis-AI-Assistant}}{Python, DeepSeek-Coder, FLAN-UL2, HuggingFace Transformers, Whisper}{Ongoing}
+\begin{cvitems}
+  \item Building a modular Jarvis-style AI assistant for code generation, image
+        captioning, and voice interaction, with prompt-based instruction tuning
+        and custom toolchain integration for autonomous task execution.
+  \item Fine-tuned DeepSeek-Coder and FLAN-UL2 for multimodal encoder-decoder
+        workflows; integrated NLP, Whisper-based speech recognition, and
+        intelligent agent orchestration.
+\end{cvitems}
+
+\cvproject{Oribu}{\cvrepo{https://github.com/catsdisownedz/Oribu}}{Python, OpenCV, Siamese Neural Network, Twilio API}{}
+\begin{cvitems}
+  \item Built an AI facial-recognition system using a Siamese neural network with
+        contrastive loss for high-accuracy one-shot face verification, designed
+        for criminal detection.
+  \item Implemented real-time recognition with automated SMS alerts via the
+        Twilio API. \textit{(First Place AI/ML Project, AASTMT.)}
+\end{cvitems}
+
+\cvproject{Music Genre Detection}{\cvrepo{https://github.com/noah-mclain/music-genre-detection}}{Python, TensorFlow/Keras, Librosa, Flask}{}
+\begin{cvitems}
+  \item Designed a CNN-LSTM-Attention deep-learning model classifying audio into
+        10 genres from mel-spectrograms, served through a Flask web interface.
+  \item Added explainable-AI tooling (SHAP, LIME, Grad-CAM, Integrated
+        Gradients), unit tests, and Sphinx-based API documentation.
+\end{cvitems}
+
+\cvproject{CMAPSS Analytics Assistant}{\cvrepo{https://github.com/omariko63/cmapss-analytics-assistant}}{Python, FastAPI, Groq Llama 3.3 70B}{}
+\begin{cvitems}
+  \item Built a NASA CMAPSS turbofan-degradation analytics service that parses
+        FD001--FD004 telemetry, computes Remaining Useful Life (RUL), and ranks
+        sensors by stability and informativeness.
+  \item Exposed a FastAPI backend with an LLM-powered natural-language QA
+        endpoint over failure-prediction signals.
+\end{cvitems}
+
+\cvproject{Fera5 Invaders}{\cvrepo{https://github.com/noah-mclain/fera5-invaders}}{Python, Pygame, NumPy, TensorFlow, PyTorch, Scikit-learn}{}
+\begin{cvitems}
+  \item Developed an arcade-style space-shooter with a reinforcement-learning
+        agent that autonomously learns to play the game.
+\end{cvitems}
+
+\cvgroup{Systems, Algorithms \& Security}
+
+\cvproject{Parallel FFT Image Processing}{\cvrepo{https://github.com/omariko63/Parallel-FFT-Image-Processing}}{C++, CMake, Parallel Computing}{}
+\begin{cvitems}
+  \item Implemented 2D FFT-based image processing in C++ with sequential,
+        partially-parallel, and fully-parallel variants to study parallel
+        speedup, benchmarked through an automated CMake harness.
+\end{cvitems}
+
+\cvproject{Interactive Knapsack Planner}{\cvrepo{https://github.com/noah-mclain/interactive-knapsack-planner}}{C++, SFML 3.0, Dear ImGui}{}
+\begin{cvitems}
+  \item Built an interactive algorithm visualizer for the 0/1 knapsack problem
+        (greedy, brute-force, dynamic programming, branch-and-bound) with live
+        DP-table animation and performance metrics.
+  \item Added a Huffman-encoding module visualizing tree construction, bit-level
+        encoding/decoding, and character-frequency analysis.
+\end{cvitems}
+
+\cvproject{Simple Certificate Authority}{\cvrepo{https://github.com/noah-mclain/certificate-authority}}{Python, Cryptography, X.509 PKI}{}
+\begin{cvitems}
+  \item Built a modular X.509 Certificate Authority supporting root-CA init,
+        issuance, revocation (CRL), verification, renewal, and PKCS\#12 export,
+        with passphrase-encrypted keys and atomic database writes.
+\end{cvitems}
+
+\cvproject{Text Editor (SCLPL)}{\cvrepo{https://github.com/catsdisownedz/Text-Editor}}{Python, Tkinter, Pillow, Graphviz, Pytest}{}
+\begin{cvitems}
+  \item Built a multi-tab editor with a full lexical and syntax-analysis pipeline
+        for a custom toy language (SCLPL), including a hand-written lexer and
+        parser for educational tooling.
+  \item Added automatic language recognition, syntax highlighting, and parse-tree
+        visualization.
+\end{cvitems}
+
+\cvproject{OverClocked}{\cvrepo{https://github.com/noah-mclain/OverClocked}}{Bash, Python, Zenity, Docker}{}
+\begin{cvitems}
+  \item Built a cross-platform (Ubuntu/macOS) system-monitoring tool for
+        hardware/software performance metrics with logging, visualization, and
+        containerized deployment.
+\end{cvitems}
+
+\cvgroup{Applications, Automation \& Games}
+
+\cvproject{Job Apply Bot}{}{Python, Groq Llama 3.3 70B, tectonic, launchd}{}
+\begin{cvitems}
+  \item Built a compliant multi-ATS job-search automation that polls public APIs
+        (Greenhouse, Lever, Ashby, Adzuna), filters new-grad SWE/ML roles by
+        skill overlap and location, and logs matches to CSV.
+  \item Auto-tailors a \LaTeX{} resume per posting via an LLM and compiles
+        per-job PDFs with tectonic; scheduled hourly via launchd.
+\end{cvitems}
+
+\cvproject{Autonomous Pick-and-Place Robot}{\cvrepo{https://github.com/noah-mclain/robotics_robot}}{Arduino (C++), Flutter, Bluetooth}{}
+\begin{cvitems}
+  \item Built the control system for an autonomous mobile robot (Arduino Uno)
+        with differential drive, a 3-DOF servo arm/gripper, and ultrasonic +
+        line-tracking sensors for a Pick-and-Place competition.
+  \item Developed a Flutter Android app communicating over Bluetooth (HC-05) for
+        manual and automatic navigation modes.
+\end{cvitems}
+
+\cvproject{Trivia Game}{\cvrepo{https://github.com/noah-mclain/trivia_game}}{Java, JavaFX, AWS RDS}{}
+\begin{cvitems}
+  \item Built a trivia game with single-player and real-time multiplayer modes
+        backed by an AWS-hosted database for room management, question delivery,
+        and live score tracking.
+  \item Implemented a multiplayer waiting room with real-time chat, ``is typing''
+        indicators, and audio/visual feedback cues using FXML interfaces.
+\end{cvitems}
+
+\cvproject{Jarvis Desktop (Fluid Jarvis Whisper)}{}{React, TypeScript, Tailwind, Flask, PyWebView}{}
+\begin{cvitems}
+  \item Packaged the Jarvis assistant as an offline cross-platform desktop app
+        with a React/Tailwind front end, Flask backend, and PyWebView wrapper
+        built via Vite.
+\end{cvitems}
+
+% ---------------------------------------------------------------------------
+\cvsection{Certifications, Awards \& Training}
+
+\cvaward{\textbf{First Place, AI/ML Project Submission -- AASTMT}}
+\cvaward{\textbf{Microsoft ML Engineer Course -- DEPI (Digital Egypt Pioneers Initiative)}}
+\cvaward{\textbf{AI \& Machine Learning Course -- Universitat Autònoma de Barcelona}}
+\cvaward{\textbf{Computer Science Camp -- Carnegie Mellon University}}
+
+% ---------------------------------------------------------------------------
+\cvsection{Languages}
+
+\textbf{Arabic:} Native \hspace{1.5em} \textbf{English:} Fluent \hspace{1.5em} \textbf{Spanish:} Intermediate
+
+\end{document}

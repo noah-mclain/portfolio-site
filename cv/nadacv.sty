@@ -1,0 +1,158 @@
+% nadacv.sty -- shared layout for Nada Mohamed's CV documents.
+%
+% Latin Modern throughout: the name and section headings use the caps design
+% (LMRomanCaps10), which lmodern maps onto the small-caps shape of the roman
+% family. Links render as plain black text with a hairline underline rather
+% than coloured text, so the CV prints identically to how it reads on screen.
+%
+% Options:
+%   compact  tightens vertical rhythm for the one-page build.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{nadacv}[2026/08/17 CV layout]
+
+\newif\ifnadacv@compact
+\DeclareOption{compact}{\nadacv@compacttrue}
+\ProcessOptions\relax
+
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
+\RequirePackage{microtype}
+\RequirePackage{xcolor}
+\RequirePackage{enumitem}
+\RequirePackage{ragged2e}
+\RequirePackage[hidelinks,unicode]{hyperref}
+
+% ---------------------------------------------------------------------------
+% Icons. fontawesome5 lives in texlive-fonts-extra, which is not always
+% installed; fall back to text glyphs so the document still builds.
+% ---------------------------------------------------------------------------
+\IfFileExists{fontawesome5.sty}{%
+  \RequirePackage{fontawesome5}%
+  \newcommand{\cvIconLocation}{\faMapMarker*}%
+  \newcommand{\cvIconPhone}{\faPhone*}%
+  \newcommand{\cvIconMail}{\faEnvelope}%
+  \newcommand{\cvIconSite}{\faGlobe}%
+  \newcommand{\cvIconLinkedIn}{\faLinkedin}%
+  \newcommand{\cvIconGitHub}{\faGithub}%
+  \newcommand{\cvIconRepo}{\faGithub}%
+  \newcommand{\cvIconAward}{\faTrophy}%
+}{%
+  \newcommand{\cvIconLocation}{$\bullet$}%
+  \newcommand{\cvIconPhone}{T}%
+  \newcommand{\cvIconMail}{@}%
+  \newcommand{\cvIconSite}{W}%
+  \newcommand{\cvIconLinkedIn}{in}%
+  \newcommand{\cvIconGitHub}{gh}%
+  \newcommand{\cvIconRepo}{gh}%
+  \newcommand{\cvIconAward}{$\star$}%
+}
+
+% ---------------------------------------------------------------------------
+% Vertical rhythm
+% ---------------------------------------------------------------------------
+\ifnadacv@compact
+  \newcommand{\cv@sectionskip}{3pt}
+  \newcommand{\cv@entryskip}{1.8pt}
+  \newcommand{\cv@itemsep}{0.3pt}
+\else
+  \newcommand{\cv@sectionskip}{8pt}
+  \newcommand{\cv@entryskip}{5pt}
+  \newcommand{\cv@itemsep}{1.5pt}
+\fi
+
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+\raggedbottom
+
+% ---------------------------------------------------------------------------
+% Header
+% ---------------------------------------------------------------------------
+
+% \cvlink{url}{shown text} -- black text, hairline underline.
+\newcommand{\cvlink}[2]{\href{#1}{\underline{\smash{#2}}}}
+
+\newcommand{\cvname}[1]{%
+  \begin{center}%
+    {\Huge\scshape #1}%
+  \end{center}%
+  \vspace{2pt}%
+}
+
+% One entry in the contact line: icon then text.
+\newcommand{\cvcontact}[2]{\mbox{{\small #1}\,\,#2}}
+
+% Separator between contact entries.
+\newcommand{\cvsep}{\hspace{0.6em}\textbullet\hspace{0.6em}}
+
+\newenvironment{cvcontacts}{%
+  \begin{center}\small
+}{%
+  \end{center}%
+}
+
+% ---------------------------------------------------------------------------
+% Sections
+% ---------------------------------------------------------------------------
+\newcommand{\cvsection}[1]{%
+  \vspace{\cv@sectionskip}%
+  {\large\bfseries #1}%
+  \vspace{1pt}%
+  \hrule height 0.4pt%
+  \vspace{\cv@entryskip}%
+}
+
+% ---------------------------------------------------------------------------
+% Entries
+% ---------------------------------------------------------------------------
+
+% \cventry{organisation}{dates}{role}{location}
+\newcommand{\cventry}[4]{%
+  \vspace{\cv@entryskip}%
+  \textbf{#1}\hfill\textbf{#2}\par
+  \textit{#3}\hfill\textit{#4}\par
+  \vspace{1pt}%
+}
+
+% \cvproject{name}{links}{tech}{dates}
+% "links" is pre-built markup (see \cvrepo) or empty.
+\newcommand{\cvproject}[4]{%
+  \vspace{\cv@entryskip}%
+  \textbf{#1}\;#2\hfill\textbf{#4}\par
+  \textit{#3}\par
+  \vspace{1pt}%
+}
+
+% Repository / site icon link, for use in a project's link slot.
+\newcommand{\cvrepo}[1]{\href{#1}{\cvIconRepo}}
+\newcommand{\cvsite}[1]{\href{#1}{\cvIconSite}}
+
+% Blank line matching the entry rhythm, usable from the document body.
+\newcommand{\cvgap}{\vspace{\cv@entryskip}}
+
+% Italic sub-heading that groups a run of projects.
+\newcommand{\cvgroup}[1]{\cvgap\textit{\textbf{#1}}\par}
+
+% \cvskill{category}{comma-separated items}
+\newcommand{\cvskill}[2]{%
+  \textbf{#1:} #2\par\vspace{\cv@itemsep}%
+}
+
+% Bulleted list used inside entries.
+\newlist{cvitems}{itemize}{1}
+\setlist[cvitems]{%
+  label=\textbullet,
+  leftmargin=*,
+  labelsep=0.5em,
+  topsep=\cv@itemsep,
+  itemsep=\cv@itemsep,
+  parsep=0pt,
+  partopsep=0pt,
+}
+
+% Single-line award / certification row.
+\newcommand{\cvaward}[1]{%
+  \cvIconAward\,\,#1\par\vspace{\cv@itemsep}%
+}
+
+\endinput
