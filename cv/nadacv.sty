@@ -52,8 +52,8 @@
 % Vertical rhythm
 % ---------------------------------------------------------------------------
 \ifnadacv@compact
-  \newcommand{\cv@sectionskip}{3pt}
-  \newcommand{\cv@entryskip}{1.8pt}
+  \newcommand{\cv@sectionskip}{6pt}
+  \newcommand{\cv@entryskip}{2pt}
   \newcommand{\cv@itemsep}{0.3pt}
 \else
   \newcommand{\cv@sectionskip}{8pt}
@@ -72,19 +72,20 @@
 % \cvlink{url}{shown text} -- black text, hairline underline.
 \newcommand{\cvlink}[2]{\href{#1}{\underline{\smash{#2}}}}
 
+% The header uses \centering rather than the center environment: center is a
+% trivlist and contributes \topsep both above and below, which stacks up to
+% roughly 30pt of dead space across the name, tagline and contact row. Explicit
+% gaps keep the block tight and put that space where it reads better, between
+% the sections.
 \newcommand{\cvname}[1]{%
-  \begin{center}%
-    {\Huge\scshape #1}%
-  \end{center}%
-  \vspace{2pt}%
+  {\centering\Huge\scshape #1\par}%
+  \vspace{1pt}%
 }
 
 % Role line under the name.
 \newcommand{\cvtagline}[1]{%
-  \begin{center}%
-    {\large #1}%
-  \end{center}%
-  \vspace{1pt}%
+  {\centering\large #1\par}%
+  \vspace{3pt}%
 }
 
 % One entry in the contact line: icon then text.
@@ -94,9 +95,10 @@
 \newcommand{\cvsep}{\hspace{0.45em}\textbullet\hspace{0.45em}}
 
 \newenvironment{cvcontacts}{%
-  \begin{center}\small
+  \begingroup\centering\small
 }{%
-  \end{center}%
+  \par\endgroup
+  \vspace{4pt}%
 }
 
 % ---------------------------------------------------------------------------
