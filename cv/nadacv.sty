@@ -79,11 +79,19 @@
   \vspace{2pt}%
 }
 
+% Role line under the name.
+\newcommand{\cvtagline}[1]{%
+  \begin{center}%
+    {\large #1}%
+  \end{center}%
+  \vspace{1pt}%
+}
+
 % One entry in the contact line: icon then text.
 \newcommand{\cvcontact}[2]{\mbox{{\small #1}\,\,#2}}
 
 % Separator between contact entries.
-\newcommand{\cvsep}{\hspace{0.6em}\textbullet\hspace{0.6em}}
+\newcommand{\cvsep}{\hspace{0.45em}\textbullet\hspace{0.45em}}
 
 \newenvironment{cvcontacts}{%
   \begin{center}\small
@@ -94,9 +102,13 @@
 % ---------------------------------------------------------------------------
 % Sections
 % ---------------------------------------------------------------------------
+% The \strut matters: without it the rule's position follows the depth of the
+% heading's line box, so headings with a descender (Summary, Experience) sit
+% further from their rule than ones without (Education, Skills). The strut
+% gives every heading the same depth, whatever letters it happens to contain.
 \newcommand{\cvsection}[1]{%
   \vspace{\cv@sectionskip}%
-  {\large\bfseries #1}%
+  {\large\bfseries #1\strut}\par
   \vspace{1pt}%
   \hrule height 0.4pt%
   \vspace{\cv@entryskip}%
