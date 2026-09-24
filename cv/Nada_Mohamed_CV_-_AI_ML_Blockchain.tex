@@ -1,0 +1,211 @@
+%-------------------------
+% Nada Mohamed — CV tailored to AI/ML Engineering & Blockchain Engineering
+% Based on Jake Gutierrez's resume template (MIT license)
+%-------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.6in}
+\addtolength{\textheight}{1.1in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generated pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.2in, itemsep=0pt, parsep=0pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\newcommand{\gh}[1]{\href{#1}{\,\faGithub}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Nada Mohamed} \\ \vspace{1pt}
+    AI/ML Engineer \textbullet{} Blockchain Engineer \\ \vspace{2pt}
+    \small \faMapMarker\ Cairo, Egypt \ $|$ \
+    \faPhone\ \href{tel:+201200369051}{\underline{+20 120 036 9051}} \ $|$ \
+    \faEnvelope\ \href{mailto:nadamo.cs@gmail.com}{\underline{nadamo.cs@gmail.com}} \ $|$ \
+    \faLinkedin\ \href{https://www.linkedin.com/in/nada-mohamed-300305ma}{\underline{nada-mohamed}} \ $|$ \
+    \faGithub\ \href{https://github.com/noah-mclain}{\underline{noah-mclain}} \ $|$ \
+    \faGlobe\ \href{https://noah-mclain.github.io/portfolio-site/}{\underline{Portfolio}}
+\end{center}
+
+
+%-----------SUMMARY-----------
+\section{Summary}
+\small{Computer Science graduate (2026, Honours) working at the intersection of machine learning and distributed ledgers.
+Fine-tuned LLMs (DeepSeek-Coder, FLAN-UL2) for a multimodal agent, shipped deep-learning and computer-vision systems
+(First Place, AASTMT), and engineered Hyperledger Fabric chaincode in Go for a regulated blockchain payroll platform
+validated by 91 passing smart-contract tests.}
+
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Arab Academy for Science, Technology \& Maritime Transport}{Sep 2022 -- 2026}
+      {BSc Computer Science (Honours), dual degree with the University of Northampton (UK) \textup{-- GPA: 3.69 / 4.0}}{Cairo, Egypt}
+      \resumeItemListStart
+        \resumeItem{Coursework: Machine Learning, Computer Vision, NLP, Algorithms \& Optimization, Parallel Computing, Databases.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0in, label={}]
+    \small{\item{
+     \textbf{AI \& Machine Learning:} PyTorch, TensorFlow, Keras, HuggingFace Transformers, Scikit-learn, OpenCV, Pandas; LLM fine-tuning, agent orchestration, NLP, Computer Vision, Reinforcement Learning, Explainable AI \\
+     \textbf{Blockchain \& Security:} Hyperledger Fabric, Chaincode (Go), RAFT ordering, endorsement policies, Privy MPC / threshold custody, non-custodial wallets, X.509 PKI, Cryptography, STRIDE threat modelling \\
+     \textbf{Languages:} Python, Go, TypeScript, JavaScript, C/C++, Java, SQL, Bash \\
+     \textbf{Serving \& Infrastructure:} FastAPI, Flask, React, Docker, Kubernetes, AWS RDS, MySQL, Git, CI/CD
+    }}
+ \end{itemize}
+
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {SAIB Bank}{Aug 2026 -- Present}
+      {FinTech Intern}{Cairo, Egypt}
+      \resumeItemListStart
+        \resumeItem{Studying fintech under the Head of FinTech \& Startup Partnerships, closing with an emerging-tech case study.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {DEPI -- Microsoft ML Engineering Curriculum}{Nov 2024 -- May 2025}
+      {AI/ML Engineer Intern}{Zamalek, Egypt}
+      \resumeItemListStart
+        \resumeItem{Completed a 7-month program in NLP, generative AI, computer vision, and model deployment; delivered milestone projects and an end-to-end capstone (Jarvis AI Assistant) with agent orchestration.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Dell Technologies}{Aug 2025 -- Sept 2025}
+      {Summer Intern}{Cairo, Egypt}
+      \resumeItemListStart
+        \resumeItem{Workshops on Docker, Kubernetes, and software engineering; led the Academy Project from concept to proposal.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+
+      \resumeProjectHeading
+          {\textbf{Payramid: Blockchain Payroll Microservice} $|$ \emph{Go, Hyperledger Fabric, Privy MPC, Twilio, TypeScript}}{2025 -- 2026}
+          \resumeItemListStart
+            \resumeItem{\textit{Graduation project.} Built a blockchain payroll and immutable-audit layer for instant salary disbursement with cryptographically verifiable proofs of payment, settling on Egypt's national rails (InstaPay, Meeza, ACH) under banking and data-protection law.}
+            \resumeItem{Engineered Hyperledger Fabric chaincode (Go) on a 3-organization RAFT network with MAJORITY endorsement; 91 passing automated tests cover serialization integrity, double-spend prevention, and a STRIDE threat model.}
+            \resumeItem{Delivered non-custodial wallets via Privy threshold (MPC) key management and an encrypted SMS relay with one-time withdrawal codes for feature phones; authored the IEEE 830 SRS and IEEE 829 test plan.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{Jarvis AI Assistant}\gh{https://github.com/noah-mclain/Jarvis-AI-Assistant} $|$ \emph{Python, DeepSeek-Coder, FLAN-UL2, HuggingFace Transformers, Whisper}}{2025 -- Present}
+          \resumeItemListStart
+            \resumeItem{Fine-tuned DeepSeek-Coder and FLAN-UL2 for multimodal code generation, image captioning, and voice interaction.}
+            \resumeItem{Integrated Whisper speech recognition and agent orchestration with custom toolchains for autonomous task execution.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{Music Genre Detection}\gh{https://github.com/noah-mclain/music-genre-detection} $|$ \emph{Python, TensorFlow/Keras, Librosa, Flask}}{}
+          \resumeItemListStart
+            \resumeItem{Designed a CNN-LSTM-Attention model classifying mel-spectrograms into 10 genres, with SHAP/LIME/Grad-CAM explainability.}
+          \resumeItemListEnd
+
+
+      \resumeProjectHeading
+          {\textbf{Oribu: AI Facial Recognition}\gh{https://github.com/catsdisownedz/Oribu} $|$ \emph{Python, OpenCV, Siamese Neural Network, Twilio API}}{2023}
+          \resumeItemListStart
+            \resumeItem{Built real-time one-shot face verification with a Siamese network and contrastive loss. \textit{(First Place, AASTMT.)}}
+          \resumeItemListEnd
+
+
+    \resumeSubHeadingListEnd
+
+
+%-----------CERTIFICATIONS-----------
+\section{Certifications, Awards \& Languages}
+ \begin{itemize}[leftmargin=0in, label={}]
+    \small{\item{
+     \faTrophy\ \textbf{First Place, AI/ML Project Submission} -- AASTMT \quad
+     \faCertificate\ \textbf{Microsoft ML Engineer Course} -- DEPI \\
+     \faCertificate\ \textbf{AI \& Machine Learning Course} -- Universitat Autònoma de Barcelona \quad
+     \faUniversity\ \textbf{CS Camp} -- Carnegie Mellon University \\
+     \faLanguage\ \textbf{Languages:} Arabic (Native), English (Fluent), Spanish (Intermediate)
+    }}
+ \end{itemize}
+
+\end{document}
