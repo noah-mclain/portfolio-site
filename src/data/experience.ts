@@ -6,10 +6,10 @@ export const experience: ExperienceEntry[] = [
     organization: 'SAIB Bank',
     location: 'Cairo, Egypt',
     startDate: 'Aug 2026',
-    endDate: 'Present',
+    endDate: 'Sep 2026',
     highlights: [
-      'Studying financial technology under the Head of FinTech & Startup Partnerships',
-      'Internship culminates in an emerging-technology case study',
+      'Studied financial technology under the Head of FinTech & Startup Partnerships',
+      'Completed an emerging-technology case study',
     ],
   },
   {

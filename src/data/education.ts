@@ -18,7 +18,7 @@ export const awards: Award[] = [
     issuer: 'Jordan FinTech Festival · Jordan · Sept 2026',
     description:
       'Represented Egypt with support from the Central Bank of Egypt (CBE) in the regional competition organized by GIE.',
-    source: 'https://aast.edu/en/presidency/news-details.php?event_type_id=1&language=1&news_id=486107301&unit_id=1&view=1',
+    source: 'https://www.linkedin.com/posts/fintecharab_arifintech-fintecharab-arabfintechchallenge-activity-7508907901780967424-L328',
   },
   {
     name: '2nd Place — FinTech Got Talent 2026',
