@@ -1,31 +1,14 @@
-.grid {
-  display: grid;
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: start;
-  grid-template-columns: 1fr;
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
 }
 
 .copy {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
   font-size: var(--text-lg);
   line-height: 1.7;
-  color: var(--color-text-muted);
-  max-width: 60ch;
-}
-
-.copy p:first-of-type {
   color: var(--color-text);
-  font-size: var(--text-xl);
-  line-height: 1.55;
-}
-
-.aside {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
-  align-self: center;
+  max-width: 70ch;
 }
 
 .certsTitle {
@@ -38,10 +21,17 @@
   margin-bottom: var(--space-4);
 }
 
+.awardList,
 .certList {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5) var(--space-8);
+}
+
+.certList {
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--glass-border);
 }
 
 .certName {
@@ -57,8 +47,10 @@
 }
 
 .award {
-  padding-bottom: var(--space-4);
-  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
 }
 
 .awardDescription {
@@ -74,6 +66,7 @@
   gap: var(--space-1);
   margin-top: var(--space-2);
   padding-block: var(--space-2);
+  min-height: 44px;
   font-size: var(--text-xs);
   font-weight: 500;
   color: var(--color-accent-strong);
@@ -89,15 +82,16 @@
 }
 
 .factList {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5) var(--space-8);
 }
 
 .fact {
   display: flex;
   align-items: flex-start;
   gap: var(--space-4);
+  min-width: 0;
 }
 
 .factIcon {
@@ -118,7 +112,7 @@
   font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: var(--color-text-subtle);
+  color: var(--color-text-muted);
 }
 
 .factValue {
@@ -128,9 +122,29 @@
   line-height: 1.5;
 }
 
-@media (min-width: 900px) {
-  .grid {
-    grid-template-columns: 1.2fr 1fr;
-    align-items: center;
+@media (min-width: 600px) {
+  .factList,
+  .certList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .fact:first-child {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 700px) {
+  .awardList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1000px) {
+  .factList {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .certList {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
