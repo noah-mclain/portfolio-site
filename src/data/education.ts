@@ -1,4 +1,4 @@
-import type { Certification, EducationEntry, Language } from '@/types';
+import type { Award, Certification, EducationEntry, Language } from '@/types';
 
 export const education: EducationEntry[] = [
   {
@@ -9,6 +9,23 @@ export const education: EducationEntry[] = [
     startDate: 'Sept 2022',
     endDate: 'June 2026',
     gpa: '3.60',
+  },
+];
+
+export const awards: Award[] = [
+  {
+    name: '3rd Place — Arab FinTech Challenge 2026',
+    issuer: 'Jordan FinTech Festival · Jordan · Sept 2026',
+    description:
+      'Represented Egypt with support from the Central Bank of Egypt (CBE) in the regional competition organized by GIE.',
+    source: 'https://aast.edu/en/presidency/news-details.php?event_type_id=1&language=1&news_id=486107301&unit_id=1&view=1',
+  },
+  {
+    name: '2nd Place — FinTech Got Talent 2026',
+    issuer: 'FinTech Egypt · Central Bank of Egypt · Sept 2026',
+    description:
+      'Won with Payramid as part of a team sponsored by SAIB Bank, earning a place to represent Egypt at the Arab FinTech Challenge.',
+    source: 'https://fintech-egypt.com/news/news_details.php?id=214',
   },
 ];
 

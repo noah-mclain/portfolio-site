@@ -1,8 +1,8 @@
-import { GraduationCap, Languages, MapPin, Rocket, Sparkles } from 'lucide-react';
+import { ArrowUpRight, GraduationCap, Languages, MapPin, Rocket, Sparkles } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { profile } from '@/data/profile';
-import { certifications, education, languages } from '@/data/education';
+import { awards, certifications, education, languages } from '@/data/education';
 import styles from './About.module.css';
 
 const degree = education[0];
@@ -55,8 +55,24 @@ export function About() {
           </Card>
 
           <Card className={`reveal ${styles.certs}`} data-delay="5">
-            <h3 className={styles.certsTitle}>Certifications</h3>
+            <h3 className={styles.certsTitle}>Awards & certifications</h3>
             <ul className={styles.certList}>
+              {awards.map((award) => (
+                <li key={award.name} className={styles.award}>
+                  <p className={styles.certName}>{award.name}</p>
+                  <p className={styles.certIssuer}>{award.issuer}</p>
+                  <p className={styles.awardDescription}>{award.description}</p>
+                  <a
+                    href={award.source}
+                    className={styles.awardLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Read the announcement for ${award.name} (opens in a new tab)`}
+                  >
+                    Read announcement <ArrowUpRight size={14} aria-hidden />
+                  </a>
+                </li>
+              ))}
               {certifications.map((cert) => (
                 <li key={cert.name}>
                   <p className={styles.certName}>{cert.name}</p>

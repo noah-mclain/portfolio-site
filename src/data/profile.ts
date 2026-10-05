@@ -9,7 +9,7 @@ export const profile: Profile = {
     'I build intelligent agents, fine-tune LLMs, and ship systems that solve real problems — from blockchain payroll rails to autonomous tooling.',
   bio: [
     "I'm a Computer Science graduate of the Arab Academy for Science & Technology, focused on AI and Machine Learning. I love taking research ideas — Siamese networks, reinforcement learning, multimodal LLMs — and turning them into things people can actually use.",
-    "I just submitted Payramid, my graduation project: a blockchain payroll layer that settles on Egypt's national payment rails with cryptographically verifiable proofs of payment. Before that I built Jarvis, a modular AI assistant with code generation, voice, and vision; interned at Dell Technologies; and completed a 7-month Microsoft ML Engineering program with DEPI.",
+    "I'm currently a FinTech Intern at SAIB Bank, studying financial technology under the Head of FinTech & Startup Partnerships. My graduation project, Payramid, is a blockchain payroll layer that settles on Egypt's national payment rails with cryptographically verifiable proofs of payment. Before that I built Jarvis, a modular AI assistant with code generation, voice, and vision; interned at Dell Technologies; and completed a 7-month Microsoft ML Engineering program with DEPI.",
     "When I'm not training models, I mentor students, contribute to open-source, and chase down whatever new paper has caught my eye.",
   ],
   availability: 'Open to AI/ML roles',

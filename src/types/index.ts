@@ -75,6 +75,13 @@ export interface Certification {
   issuer: string;
 }
 
+export interface Award {
+  name: string;
+  issuer: string;
+  description: string;
+  source: string;
+}
+
 export interface Language {
   name: string;
   proficiency: 'Native' | 'Fluent' | 'Intermediate' | 'Basic';

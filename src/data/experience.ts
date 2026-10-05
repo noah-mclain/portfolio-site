@@ -2,6 +2,17 @@ import type { ExperienceEntry } from '@/types';
 
 export const experience: ExperienceEntry[] = [
   {
+    role: 'FinTech Intern',
+    organization: 'SAIB Bank',
+    location: 'Cairo, Egypt',
+    startDate: 'Aug 2026',
+    endDate: 'Present',
+    highlights: [
+      'Studying financial technology under the Head of FinTech & Startup Partnerships',
+      'Internship culminates in an emerging-technology case study',
+    ],
+  },
+  {
     role: 'Summer Intern',
     organization: 'Dell Technologies',
     location: 'Cairo, Egypt',
