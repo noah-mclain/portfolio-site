@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <script>
+      // The hash router owns section positions; browser history restoration
+      // can otherwise overwrite a remounted fragment target in WebKit.
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
       // Establish the authoritative theme before styles or React can paint.
       (function () {
         var theme;
