@@ -1,8 +1,4 @@
-import type {
-  AnchorHTMLAttributes,
-  ButtonHTMLAttributes,
-  ReactNode,
-} from 'react';
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react';
 import styles from './Button.module.css';
 
 type Variant = 'primary' | 'secondary' | 'ghost';
@@ -16,24 +12,12 @@ interface BaseProps {
   children: ReactNode;
 }
 
-type ButtonProps = BaseProps &
-  ButtonHTMLAttributes<HTMLButtonElement> & { as?: 'button' };
-type AnchorProps = BaseProps &
-  AnchorHTMLAttributes<HTMLAnchorElement> & { as: 'a' };
+type ButtonProps = BaseProps & ButtonHTMLAttributes<HTMLButtonElement> & { as?: 'button' };
+type AnchorProps = BaseProps & AnchorHTMLAttributes<HTMLAnchorElement> & { as: 'a' };
 
 export function Button(props: ButtonProps | AnchorProps) {
-  const {
-    variant = 'primary',
-    size = 'md',
-    iconLeft,
-    iconRight,
-    children,
-    className,
-    ...rest
-  } = props;
-  const classes = [styles.button, styles[variant], styles[size], className]
-    .filter(Boolean)
-    .join(' ');
+  const { variant = 'primary', size = 'md', iconLeft, iconRight, children, className, ...rest } = props;
+  const classes = [styles.button, styles[variant], styles[size], className].filter(Boolean).join(' ');
 
   const content = (
     <>
@@ -44,9 +28,7 @@ export function Button(props: ButtonProps | AnchorProps) {
   );
 
   if (props.as === 'a') {
-    const { as: _as, ...anchorRest } =
-      rest as AnchorHTMLAttributes<HTMLAnchorElement> & { as?: string };
-    void _as;
+    const anchorRest = rest as AnchorHTMLAttributes<HTMLAnchorElement>;
     return (
       <a className={classes} {...anchorRest}>
         {content}
@@ -54,9 +36,7 @@ export function Button(props: ButtonProps | AnchorProps) {
     );
   }
 
-  const { as: _as, ...buttonRest } =
-    rest as ButtonHTMLAttributes<HTMLButtonElement> & { as?: string };
-  void _as;
+  const buttonRest = rest as ButtonHTMLAttributes<HTMLButtonElement>;
   return (
     <button className={classes} {...buttonRest}>
       {content}

@@ -1,0 +1,12 @@
+.bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient-accent);
+  transform-origin: left;
+  z-index: calc(var(--z-nav) + 1);
+  transition: transform 50ms linear;
+  box-shadow: 0 0 12px var(--color-accent-glow);
+}

@@ -1,25 +1,56 @@
 .toggle {
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  color: var(--color-text-muted);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-bg) 55%, transparent);
+  border: 1px solid var(--glass-border-strong);
+  backdrop-filter: var(--glass-blur-strong);
+  -webkit-backdrop-filter: var(--glass-blur-strong);
+  box-shadow:
+    var(--glass-shadow),
+    inset 0 1px 0 var(--glass-highlight);
+  color: var(--color-text);
+  cursor: pointer;
+  transition:
+    background var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out);
 }
+
 .toggle:hover {
-  color: var(--color-accent);
+  background: var(--glass-bg-strong);
   border-color: var(--color-accent);
+  color: var(--color-accent-soft);
 }
+
+/* One icon at a time, cross-fading with a little spin. */
 .icon {
-  grid-area: 1 / 1;
+  position: absolute;
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
 }
+
 .sun {
-  display: none;
+  opacity: 0;
+  transform: rotate(90deg) scale(0.6);
 }
-:global([data-theme="dark"]) .sun {
-  display: block;
+
+.moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
 }
-:global([data-theme="dark"]) .moon {
-  display: none;
+
+[data-theme='light'] .sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+[data-theme='light'] .moon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.6);
 }

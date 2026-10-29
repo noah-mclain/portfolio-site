@@ -1,97 +1,145 @@
+/* Clear the floating navbar, since this page starts at the top. */
 .page {
-  padding-top: 1rem;
+  padding-top: 76px;
 }
+
 .back {
   display: inline-flex;
-  gap: 0.5rem;
   align-items: center;
-  color: var(--color-accent);
-  min-height: 44px;
-  margin-bottom: 1.5rem;
+  gap: var(--space-2);
+  align-self: flex-start;
+  margin-bottom: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  transition: color var(--duration-base) var(--ease-out);
 }
+
+.back:hover {
+  color: var(--color-accent-soft);
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2rem;
+  gap: var(--space-5);
+  grid-template-columns: 1fr;
 }
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  border-top: 1px solid var(--color-border);
-  padding-top: 1.5rem;
-  min-width: 0;
-}
-.cardHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-  gap: 1rem;
-}
-.name {
-  font-size: var(--text-xl);
-  font-weight: 600;
-}
-.tagline {
-  font-weight: 500;
-}
-.period {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
-}
-.description {
-  color: var(--color-text-muted);
-  line-height: 1.7;
-}
-.previewLink {
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border);
-  aspect-ratio: 16 / 9;
-}
-.preview {
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  object-position: top;
-}
-.tech {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 0;
-}
-.tech li:not(:last-child)::after {
-  content: '/';
-  margin-inline: 0.5rem;
-  color: var(--color-border-strong);
-}
-.links {
-  display: flex;
-  gap: 1rem;
-}
-.linkBtn {
-  display: inline-flex;
-  gap: 0.4rem;
-  align-items: center;
-  min-height: 44px;
-  color: var(--color-accent);
-}
-@media (max-width: 650px) {
-  .grid {
-    grid-template-columns: minmax(0, 1fr);
+
+/* Reveal rows left-to-right: delay by column, not by list index. */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .grid > :nth-child(2n) {
+    transition-delay: 100ms;
   }
 }
 
-.previewLink {
-  position: relative;
+@media (min-width: 1024px) {
+  .grid > :nth-child(3n + 2) {
+    transition-delay: 100ms;
+  }
+  .grid > :nth-child(3n) {
+    transition-delay: 200ms;
+  }
 }
-.previewLink[data-failed]::after {
-  content: 'Preview unavailable';
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  height: 100%;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: -0.015em;
+}
+
+.tagline {
+  font-size: var(--text-sm);
+  color: var(--color-accent-soft);
+  margin-top: -6px;
+}
+
+.period {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-subtle);
+  margin-top: -4px;
+}
+
+.previewLink {
+  display: block;
+  margin: calc(var(--card-padding) * -1) calc(var(--card-padding) * -1) 0;
+}
+
+.preview {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: top;
+  border-bottom: 1px solid var(--glass-border);
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.previewLink:hover .preview {
+  opacity: 0.85;
+}
+
+.description {
+  font-size: var(--text-sm);
   color: var(--color-text-muted);
-  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+.links {
+  display: flex;
+  gap: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.linkBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.linkBtn:hover {
+  color: var(--color-accent-soft);
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }

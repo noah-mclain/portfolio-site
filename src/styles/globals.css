@@ -1,49 +1,102 @@
-@import "./tokens.css";
-@import "./reset.css";
+@import './tokens.css';
+@import './reset.css';
+
 body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans);
   font-size: var(--text-base);
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  background-image: var(--gradient-aurora);
+  background-attachment: fixed;
+  transition:
+    background-color var(--duration-theme) var(--ease-out),
+    color var(--duration-theme) var(--ease-out);
 }
+
 ::selection {
   background: var(--color-accent-bg-strong);
   color: var(--color-text);
 }
-html {
-  scrollbar-color: var(--color-border-strong) var(--color-bg);
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-strong);
+}
+
 :focus-visible {
   outline: 2px solid var(--color-accent);
-  outline-offset: 4px;
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
 }
-a {
-  text-underline-offset: 0.22em;
-}
-a:hover {
-  color: var(--color-accent);
-}
+
+/* Reusable container */
 .container {
   width: 100%;
   max-width: var(--container-max);
   margin-inline: auto;
   padding-inline: var(--container-padding);
 }
-section[id] {
-  scroll-margin-top: 88px;
+
+/* Reveal-on-scroll primitive — paired with useScrollReveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--duration-reveal) var(--ease-out),
+    transform var(--duration-reveal) var(--ease-out);
 }
-.skipLink {
-  position: fixed;
-  top: -100px;
-  left: 1rem;
-  padding: 1rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-accent);
-  z-index: 100;
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
-.skipLink:focus {
-  top: 1rem;
+
+.reveal[data-delay='1'] { transition-delay: 80ms; }
+.reveal[data-delay='2'] { transition-delay: 160ms; }
+.reveal[data-delay='3'] { transition-delay: 240ms; }
+.reveal[data-delay='4'] { transition-delay: 320ms; }
+.reveal[data-delay='5'] { transition-delay: 400ms; }
+
+/* ============================================================
+   Liquid-glass utility — frosted, translucent, subtly luminous
+   Compose with .glass on any element.
+   .glass--strong increases opacity for higher hierarchy items.
+   ============================================================ */
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    var(--glass-shadow),
+    inset 0 1px 0 var(--glass-highlight);
 }
-main:focus {
-  outline: none;
+
+.glass--strong {
+  background: var(--glass-bg-strong);
+  border-color: var(--glass-border-strong);
+  backdrop-filter: var(--glass-blur-strong);
+  -webkit-backdrop-filter: var(--glass-blur-strong);
+}
+
+/* Fallback for browsers without backdrop-filter */
+@supports not (backdrop-filter: blur(1px)) {
+  .glass {
+    background: var(--color-surface);
+  }
 }

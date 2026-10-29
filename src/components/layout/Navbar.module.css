@@ -1,81 +1,205 @@
 .nav {
-  position: sticky;
+  position: fixed;
   top: 0;
+  inset-inline: 0;
   z-index: var(--z-nav);
-  background: var(--color-bg);
-  border-bottom: 1px solid var(--color-border);
+  padding-top: var(--space-3);
+  pointer-events: none;
+  transition: padding var(--duration-base) var(--ease-out);
 }
+
+.scrolled {
+  padding-top: var(--space-2);
+}
+
 .inner {
   display: flex;
   align-items: center;
-  gap: 2rem;
-  min-height: 72px;
-  position: relative;
+  justify-content: space-between;
+  gap: var(--space-6);
 }
+
+.inner > * {
+  pointer-events: auto;
+}
+
+/* Shared frosted surface for everything floating over page content.
+   Tinted from --color-bg so it stays legible over photos and carries the
+   same glass look in both themes. */
+.logo,
+.pill,
+.dock {
+  background: color-mix(in srgb, var(--color-bg) 55%, transparent);
+  border: 1px solid var(--glass-border-strong);
+  backdrop-filter: var(--glass-blur-strong);
+  -webkit-backdrop-filter: var(--glass-blur-strong);
+  box-shadow:
+    var(--glass-shadow),
+    inset 0 1px 0 var(--glass-highlight);
+}
+
 .logo {
-  font-weight: 600;
-  font-size: 1.1rem;
-  white-space: nowrap;
+  display: inline-flex;
+  align-items: baseline;
+  padding: 0.3rem 0.9rem 0.4rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-script);
+  font-size: clamp(1.35rem, 1.1rem + 0.7vw, 1.7rem);
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  transition: border-color var(--duration-base) var(--ease-out);
 }
-.logo span {
-  color: var(--color-accent);
-}
-.controls {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  order: 3;
-}
-.links {
-  display: flex;
-  gap: 1.3rem;
-  margin-left: auto;
-}
-.links a {
-  display: flex;
-  align-items: center;
-  min-height: 44px;
-  font-size: 0.9rem;
-  border-bottom: 2px solid transparent;
-}
-.links a[aria-current] {
-  color: var(--color-accent);
+
+.logo:hover {
   border-color: var(--color-accent);
 }
-.menu {
+
+.logoMark {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logoDot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  margin-left: 4px;
+  box-shadow: 0 0 12px var(--color-accent-glow);
+}
+
+/* ---- Desktop: floating liquid-glass pill ---- */
+
+.desktop {
   display: none;
+}
+
+.pill {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 5px;
+  border-radius: var(--radius-pill);
+}
+
+/* The liquid blob that glides between links. */
+.indicator {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-bg-strong);
+  box-shadow:
+    inset 0 1px 0 var(--glass-highlight),
+    0 0 18px var(--color-accent-glow);
+  transition:
+    transform 0.45s cubic-bezier(0.3, 1.25, 0.45, 1),
+    width 0.45s cubic-bezier(0.3, 1.25, 0.45, 1),
+    opacity var(--duration-base) var(--ease-out);
+  will-change: transform, width;
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 0.95rem;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  border-radius: var(--radius-pill);
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.link:hover {
+  color: var(--color-text);
+}
+
+.linkActive {
+  color: var(--color-text);
+}
+
+/* ---- Mobile: floating glass dock ---- */
+
+.dock {
+  position: fixed;
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  border-radius: var(--radius-pill);
+  transition:
+    transform 0.5s cubic-bezier(0.3, 1.15, 0.45, 1),
+    opacity 0.35s var(--ease-out);
+}
+
+/* Parked below the viewport while the hero (and its pill CTAs) is on screen. */
+.dockHidden {
+  transform: translate(-50%, calc(100% + 24px + env(safe-area-inset-bottom)));
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Liquid blob behind the active dock icon. Geometry mirrors the constants
+   in Navbar.tsx: 6px padding, 42px items, 4px gap. */
+.dockIndicator {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--color-accent-bg-strong);
+  box-shadow: 0 0 14px var(--color-accent-glow);
+  transition: transform 0.45s cubic-bezier(0.3, 1.25, 0.45, 1);
+  will-change: transform;
+}
+
+.dockItem {
+  position: relative;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: var(--color-text-muted);
+  transition:
+    color var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
 }
-@media (max-width: 850px) {
-  .inner {
-    min-height: 64px;
-    flex-wrap: wrap;
-    gap: 0;
+
+.dockItem:active {
+  transform: scale(0.92);
+}
+
+.dockItemActive {
+  color: var(--color-accent-soft);
+}
+
+@media (min-width: 768px) {
+  .desktop {
+    display: block;
   }
-  .controls {
-    margin-left: auto;
-    order: 0;
-  }
-  .menu {
-    display: flex;
-  }
-  .links {
+  .dock {
     display: none;
-    width: 100%;
-    margin: 0;
-    padding-block: 0.5rem 1rem;
-    gap: 0.25rem 1rem;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-  .open {
-    display: grid;
-  }
-  .links a {
-    justify-content: center;
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .logo,
+  .pill,
+  .dock {
+    background: var(--color-surface);
   }
 }
