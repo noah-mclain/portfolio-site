@@ -1,8 +1,8 @@
 import { ArrowRight, ArrowUpRight, Github } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
-import { Card } from '@/components/ui/Card';
 import { Pill } from '@/components/ui/Pill';
 import { Button } from '@/components/ui/Button';
+import { awards } from '@/data/education';
 import { spotlightProjects } from '@/data/projects';
 import { trackEvent } from '@/lib/analytics';
 import type { Project } from '@/types';
@@ -18,26 +18,28 @@ export function Projects() {
   return (
     <Section
       id="projects"
-      eyebrow="Selected work"
       title="Projects I've built"
-      description="Current favourites — the full archive is one click away."
+      description="Applied AI, payment infrastructure, and software built with a team."
     >
       <div className={styles.grid}>
-        {spotlightProjects.map((project, i) => (
-          <Card
+        {spotlightProjects.map((project) => (
+          <article
             key={project.name}
-            interactive={Boolean(project.link || project.repo)}
-            className={`reveal ${styles.card} ${project.featured ? styles.featured : ''}`}
-            data-delay={String((i % 5) + 1)}
+            className={`${styles.card} ${project.featured ? styles.featured : ''}`}
           >
             <div className={styles.cardHeader}>
               <div>
                 <h3 className={styles.name}>{project.name}</h3>
                 <p className={styles.tagline}>{project.tagline}</p>
-                {project.period && <p className={styles.period}>{project.period}</p>}
+                {project.period && (
+                  <p className={styles.period}>{project.period}</p>
+                )}
               </div>
               {project.status && (
-                <Pill tone={project.status === 'ongoing' ? 'accent' : 'muted'} dot={project.status === 'ongoing'}>
+                <Pill
+                  tone={project.status === 'ongoing' ? 'accent' : 'muted'}
+                  dot={project.status === 'ongoing'}
+                >
                   {STATUS_LABEL[project.status]}
                 </Pill>
               )}
@@ -51,6 +53,22 @@ export function Projects() {
               ))}
             </ul>
 
+            {project.featured && (
+              <div className={styles.validation}>
+                <h4>Competition results</h4>
+                {awards.map((award) => (
+                  <a
+                    key={award.name}
+                    href={award.source}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {award.name}
+                    <ArrowUpRight size={14} />
+                  </a>
+                ))}
+              </div>
+            )}
             <ul className={styles.tech}>
               {project.tech.map((t) => (
                 <li key={t}>
@@ -85,11 +103,11 @@ export function Projects() {
                 )}
               </div>
             )}
-          </Card>
+          </article>
         ))}
       </div>
 
-      <div className={`${styles.more} reveal`} data-delay="1">
+      <div className={styles.more}>
         <Button
           as="a"
           href="#/projects"

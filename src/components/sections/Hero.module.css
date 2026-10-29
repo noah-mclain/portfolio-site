@@ -1,185 +1,77 @@
 .hero {
   position: relative;
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: flex;
-  align-items: center;
-  padding-top: 88px;
+  padding-block: clamp(3rem, 7vw, 6rem);
   overflow: hidden;
-  scroll-margin-top: 0;
 }
-
-.glow {
-  position: absolute;
-  top: -10%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(900px, 90vw);
-  aspect-ratio: 1;
-  background:
-    radial-gradient(circle, var(--color-accent-bg-strong) 0%, transparent 60%);
-  filter: blur(60px);
-  pointer-events: none;
-  z-index: -1;
-  animation: float 12s var(--ease-in-out) infinite alternate;
-}
-
-@keyframes float {
-  from { transform: translate(-50%, -2%) scale(1); }
-  to   { transform: translate(-50%,  2%) scale(1.05); }
-}
-
 .inner {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
   align-items: center;
-  gap: var(--space-8);
-  padding-block: var(--space-10);
+  gap: 4rem;
+  position: relative;
 }
-
 .content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--space-5);
-  text-align: center;
+  align-items: flex-start;
+  gap: 1.25rem;
 }
-
-.pillRow {
-  display: flex;
+.availability {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
 }
-
 .headline {
-  font-family: var(--font-display);
   font-size: var(--text-5xl);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1.02;
-  color: var(--color-text);
-}
-
-.name {
-  background: var(--gradient-text);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.title {
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
   font-weight: 600;
-  color: var(--color-text-muted);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
 }
-
+.title {
+  font-size: var(--text-xl);
+  font-weight: 500;
+  max-width: 30ch;
+}
 .tagline {
-  max-width: 52ch;
-  font-size: var(--text-lg);
+  max-width: 54ch;
   color: var(--color-text-muted);
-  line-height: 1.65;
+  line-height: 1.7;
 }
-
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-4);
-  margin-top: var(--space-4);
+  gap: 0.75rem;
+  margin-top: 0.5rem;
 }
-
-/* ---- Portrait ---- */
-
-.portraitWrap {
-  position: relative;
-  width: min(68vw, 300px);
-}
-
-.portraitGlow {
-  position: absolute;
-  inset: 8% -6% -4% -6%;
-  background: radial-gradient(ellipse at 50% 40%, var(--color-accent-bg-strong), transparent 70%);
-  filter: blur(28px);
-  z-index: -1;
-}
-
 .portrait {
-  display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  border-radius: var(--radius-xl, 24px);
-  border: 1px solid var(--glass-border-strong);
-  box-shadow:
-    var(--glass-shadow),
-    0 24px 60px -24px var(--color-accent-glow),
-    inset 0 1px 0 var(--glass-highlight);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 4px;
 }
-
-.scrollHint {
+.circuit {
   position: absolute;
-  bottom: var(--space-8);
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-2);
-  color: var(--color-text-subtle);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  width: 440px;
+  bottom: 0;
+  right: 0;
+  color: var(--color-border-strong);
+  opacity: 0.18;
+  pointer-events: none;
 }
-
-.scrollLine {
-  width: 1px;
-  height: 36px;
-  background: linear-gradient(180deg, var(--color-accent), transparent);
-  animation: drop 2s var(--ease-in-out) infinite;
-}
-
-@keyframes drop {
-  0%   { transform: translateY(-12px) scaleY(0.6); opacity: 0; }
-  40%  { opacity: 1; }
-  100% { transform: translateY(12px) scaleY(1); opacity: 0; }
-}
-
-/* ---- Split layout on wide screens ---- */
-
-@media (min-width: 900px) {
+@media (max-width: 700px) {
   .inner {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    align-items: center;
-    gap: clamp(2.5rem, 6vw, 5rem);
+    grid-template-columns: minmax(0, 1fr) 160px;
+    gap: 1.5rem;
   }
-
   .content {
-    align-items: flex-start;
-    text-align: left;
+    grid-column: 1 / -1;
   }
-
-  .tagline {
-    max-width: 46ch;
-  }
-
   .portraitWrap {
-    width: min(34vw, 400px);
-    justify-self: center;
-    /* A touch of asymmetry so the layout doesn't feel templated. */
-    rotate: 1.5deg;
+    grid-column: 1 / -1;
+    width: 180px;
   }
-}
-
-@media (max-width: 600px) {
-  .actions {
-    width: 100%;
-    flex-direction: column;
-  }
-  /* The hero fills small screens edge-to-edge; the hint would collide
-     with the CTA buttons — and the mobile dock lives there anyway. */
-  .scrollHint {
-    display: none;
+  .headline {
+    font-size: 2.7rem;
   }
 }
