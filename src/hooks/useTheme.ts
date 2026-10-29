@@ -1,32 +1,44 @@
 import { useCallback, useEffect, useState } from 'react';
-
 export type Theme = 'light' | 'dark';
-
-const STORAGE_KEY = 'theme';
-
-function readInitial(): Theme {
-  if (typeof window === 'undefined') return 'dark';
-  const stored = window.localStorage.getItem(STORAGE_KEY);
-  if (stored === 'light' || stored === 'dark') return stored;
-  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-}
-
-/**
- * Reads/writes the active theme. Sets `data-theme` on <html> so CSS variables
- * can swap. Persists the explicit choice to localStorage; if the user has
- * never chosen, the OS preference wins (handled in tokens.css too).
- */
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>(readInitial);
-
+  const [theme, setTheme] = useState<Theme>(() =>
+    document.documentElement.dataset.theme === 'light' ? 'light' : 'dark',
+  );
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    window.localStorage.setItem(STORAGE_KEY, theme);
-  }, [theme]);
-
-  const toggle = useCallback(() => {
-    setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
+    const media = window.matchMedia('(prefers-color-scheme: light)');
+    const sync = () => {
+      let stored: string | null = null;
+      try {
+        stored = localStorage.getItem('theme');
+      } catch {
+        /* Storage is optional. */
+      }
+      const next =
+        stored === 'dark' || stored === 'light'
+          ? stored
+          : media.matches
+            ? 'light'
+            : 'dark';
+      document.documentElement.dataset.theme = next;
+      setTheme(next);
+    };
+    media.addEventListener('change', sync);
+    window.addEventListener('storage', sync);
+    return () => {
+      media.removeEventListener('change', sync);
+      window.removeEventListener('storage', sync);
+    };
   }, []);
-
-  return { theme, toggle, setTheme };
+  const toggle = useCallback(() => {
+    const next =
+      document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    setTheme(next);
+    try {
+      localStorage.setItem('theme', next);
+    } catch {
+      /* Keep the in-memory choice. */
+    }
+  }, []);
+  return { theme, toggle };
 }

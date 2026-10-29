@@ -10,3 +10,7 @@ dist-ssr
 .env
 .env.*
 !.env.example
+
+# Local design review evidence and workflow observations
+.impeccable/review/
+skill-observations/

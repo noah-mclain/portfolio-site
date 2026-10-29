@@ -9,9 +9,9 @@ Live at [noah-mclain.github.io/portfolio-site](https://noah-mclain.github.io/por
 - **Vite + React 18 + TypeScript** — fast HMR, tiny bundle
 - **CSS Modules** — scoped styles, zero runtime
 - **Lucide React** — tree-shakable icons
-- **IntersectionObserver** — DIY scroll reveals (no animation lib)
+- **IntersectionObserver** — active-section navigation without scroll listeners
 
-Bundle size: ~57 KB gzipped JS, ~5 KB gzipped CSS.
+Bundle size: ~57 KB gzipped JS, ~3.5 KB gzipped CSS.
 
 ## Develop
 
@@ -28,11 +28,11 @@ npm run lint     # type-check only
 ```
 src/
 ├── components/
-│   ├── layout/      # Navbar, Footer, ScrollProgress
+│   ├── layout/      # Navbar, Footer
 │   ├── sections/    # Hero, About, Skills, Experience, Projects, Contact
-│   └── ui/          # Button, Card, Pill, Section, SocialIcon
+│   └── ui/          # Button, Pill, Section, SocialIcon
 ├── data/            # Typed content (profile, skills, projects, experience, education)
-├── hooks/           # useScrollReveal, useActiveSection
+├── hooks/           # useActiveSection, useTheme
 ├── styles/          # tokens.css, reset.css, globals.css
 └── types/           # Shared TypeScript interfaces
 ```
@@ -41,19 +41,16 @@ Content lives in `src/data/*.ts` — edit those to update the site, no component
 
 ## Design tokens
 
-All colors, typography scale, spacing, and motion live in [`src/styles/tokens.css`](src/styles/tokens.css). Type and spacing use `clamp()` so the layout fluidly scales from 320px phones to 4K monitors without breakpoint cliffs.
+Theme colors, typography scale, container spacing, and corner radii live in [`src/styles/tokens.css`](src/styles/tokens.css). Fluid heading and section spacing combine with responsive content layouts.
 
-Breakpoints (mobile-first):
+See [DESIGN.md](DESIGN.md) for the palette, information hierarchy, responsive behavior, theme initialization, and motion policy.
 
-- `< 480px` — single column, condensed contact rows
-- `≥ 480px` — full social labels
-- `≥ 640px` — 2-col skills grid
-- `≥ 700px` — 2-col projects grid
-- `≥ 768px` — desktop nav, 2-col about
-- `≥ 900px` — 2-col contact
-- `≥ 1024px` — 3-col skills
-- `≥ 1100px` — 3-col projects
-- `1280px` container max-width on ultrawide
+- Up to 850px: expandable mobile navigation.
+- Up to 700px: stacked hero and selected project rows.
+- Up to 650px: single-column skills and archive.
+- Up to 550px: single-column About facts and certifications.
+- Up to 500px: stacked experience dates.
+- Container max-width: 1120px.
 
 ## Deployment
 

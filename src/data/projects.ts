@@ -49,7 +49,8 @@ export const projects: Project[] = [
     tech: ['JavaScript', 'PHP', 'HTML', 'CSS', 'Python'],
     status: 'shipped',
     spotlight: true,
-    image: 'https://raw.githubusercontent.com/catsdisownedz/Pixel-Paradise/main/readmeMedia/homepage.png',
+    image:
+      'https://raw.githubusercontent.com/catsdisownedz/Pixel-Paradise/main/readmeMedia/homepage.png',
     repo: 'https://github.com/catsdisownedz/Pixel-Paradise',
   },
   {
@@ -64,7 +65,8 @@ export const projects: Project[] = [
     ],
     tech: ['Python', 'Pygame', 'TensorFlow', 'PyTorch', 'NumPy'],
     status: 'shipped',
-    image: 'https://raw.githubusercontent.com/noah-mclain/fera5-invaders/main/assets/ReadmeMedia/dekwan1.png',
+    image:
+      'https://raw.githubusercontent.com/noah-mclain/fera5-invaders/main/assets/ReadmeMedia/dekwan1.png',
     repo: 'https://github.com/noah-mclain/fera5-invaders',
   },
   {
@@ -79,7 +81,8 @@ export const projects: Project[] = [
     ],
     tech: ['Java', 'JavaFX', 'AWS', 'SQL'],
     status: 'shipped',
-    image: 'https://raw.githubusercontent.com/noah-mclain/trivia_game/main/readmeMedia/trivia1.png',
+    image:
+      'https://raw.githubusercontent.com/noah-mclain/trivia_game/main/readmeMedia/trivia1.png',
     repo: 'https://github.com/noah-mclain/trivia_game',
   },
   {
@@ -94,7 +97,8 @@ export const projects: Project[] = [
     ],
     tech: ['Python', 'Tkinter', 'Pillow', 'Graphviz', 'Pytest'],
     status: 'shipped',
-    image: 'https://raw.githubusercontent.com/catsdisownedz/Text-Editor/main/readmeMedia/SCLPL1.png',
+    image:
+      'https://raw.githubusercontent.com/catsdisownedz/Text-Editor/main/readmeMedia/SCLPL1.png',
     repo: 'https://github.com/catsdisownedz/Text-Editor',
   },
   {
@@ -130,6 +134,6 @@ export const projects: Project[] = [
 /** Home-page picks, in display order. */
 export const spotlightProjects: Project[] = [
   projects.find((p) => p.name === 'Payramid')!,
-  projects.find((p) => p.name === 'Pixel Paradise')!,
   projects.find((p) => p.name === 'Jarvis AI Assistant')!,
+  projects.find((p) => p.name === 'Pixel Paradise')!,
 ];
