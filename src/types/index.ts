@@ -71,15 +71,23 @@ export interface EducationEntry {
   startDate: string;
   endDate: string;
   gpa?: string;
+  major?: string;
+  /** Institution logos, drawn in the text color. */
+  logos?: string[];
+  honors?: boolean;
 }
 
 export interface Certification {
   name: string;
   issuer: string;
+  /** Issuer's logo, drawn in the text color. */
+  logo?: string;
 }
 
 export interface Award {
   name: string;
+  /** Finishing place, shown as a medal. */
+  place: number;
   issuer: string;
   description: string;
   source: string;
