@@ -67,8 +67,9 @@
   height: 56px;
   border-radius: 50%;
   border: 1.5px solid var(--color-accent);
-  background: var(--color-bg);
-  color: var(--color-text);
+  /* Same tint as the site's icon tiles, over a solid base so traces don't show through. */
+  background: linear-gradient(var(--color-accent-bg-strong), var(--color-accent-bg-strong)), var(--color-bg);
+  color: var(--color-accent-soft);
 }
 
 .initials {

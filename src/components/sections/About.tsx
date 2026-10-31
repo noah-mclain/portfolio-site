@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { ArrowUpRight, GraduationCap, Languages, MapPin } from 'lucide-react';
+import { IconTile } from '@/components/ui/IconTile';
 import { LogoMark } from '@/components/ui/LogoMark';
 import { Medal } from '@/components/ui/Medal';
 import { Section } from '@/components/ui/Section';
@@ -65,7 +66,7 @@ export function About() {
           <ul className={styles.factList}>
             {facts.map(({ icon, label, value, wide }) => (
               <li key={label} className={styles.fact}>
-                <span className={`${styles.factIcon} ${wide ? styles.factIconWide : ''}`}>{icon}</span>
+                <IconTile wide={wide}>{icon}</IconTile>
                 <div>
                   <p className={styles.factLabel}>{label}</p>
                   <p className={styles.factValue}>{value}</p>
@@ -81,7 +82,9 @@ export function About() {
             {awards.map((award) => (
               <li key={award.name} className={styles.award}>
                 <span className={styles.itemHead}>
-                  <Medal place={award.place} size={32} />
+                  <IconTile>
+                    <Medal place={award.place} size={28} />
+                  </IconTile>
                   <span>
                     <p className={styles.certName}>{award.name}</p>
                     <p className={styles.certIssuer}>{award.issuer}</p>
@@ -102,7 +105,11 @@ export function About() {
           <ul className={styles.certList}>
             {certifications.map((cert) => (
               <li key={cert.name} className={styles.itemHead}>
-                {cert.logo && <LogoMark src={cert.logo} size={30} className={styles.certLogo} />}
+                {cert.logo && (
+                  <IconTile>
+                    <LogoMark src={cert.logo} size={26} />
+                  </IconTile>
+                )}
                 <span>
                   <p className={styles.certName}>{cert.name}</p>
                   <p className={styles.certIssuer}>{cert.issuer}</p>

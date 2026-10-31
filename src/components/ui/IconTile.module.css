@@ -1,0 +1,17 @@
+.tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  color: var(--color-accent-soft);
+  background: var(--color-accent-bg-strong);
+}
+
+/* For a pair of logos side by side. */
+.wide {
+  width: auto;
+  padding-inline: var(--space-2);
+}

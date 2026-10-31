@@ -94,18 +94,6 @@
   min-width: 0;
 }
 
-.factIcon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-md);
-  color: var(--color-accent-soft);
-  background: var(--color-accent-bg-strong);
-}
-
 .factLabel {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
@@ -152,11 +140,6 @@
   }
 }
 
-.factIconWide {
-  width: auto;
-  padding-inline: var(--space-2);
-}
-
 .logoPair {
   display: inline-flex;
   align-items: center;
@@ -176,11 +159,6 @@
   display: flex;
   align-items: flex-start;
   gap: var(--space-3);
-}
-
-.certLogo {
-  margin-top: 0;
-  color: var(--color-text-muted);
 }
 
 /* The middle fact sits in the middle of its column, so the row reads balanced. */
