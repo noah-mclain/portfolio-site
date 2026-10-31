@@ -28,7 +28,7 @@ export function useActiveSection(sectionIds: string[]): string {
         if (el.getBoundingClientRect().top <= focus) current = id;
       }
       // At the very bottom the final (short) section may never reach the
-      // focus line — light it up anyway.
+      // focus line, light it up anyway.
       const bottomed =
         window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
       setActive(bottomed ? last : current);
