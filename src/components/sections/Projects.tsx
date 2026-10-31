@@ -3,17 +3,11 @@ import { ArrowRight, ArrowUpRight, Github } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { Pill } from '@/components/ui/Pill';
+import { StatusPill } from '@/components/ui/StatusPill';
 import { Button } from '@/components/ui/Button';
 import { spotlightProjects } from '@/data/projects';
 import { trackEvent } from '@/lib/analytics';
-import type { Project } from '@/types';
 import styles from './Projects.module.css';
-
-const STATUS_LABEL: Record<NonNullable<Project['status']>, string> = {
-  ongoing: 'Ongoing',
-  shipped: 'Shipped',
-  archived: 'Archived',
-};
 
 export function Projects() {
   return (
@@ -34,11 +28,7 @@ export function Projects() {
                 <h3 className={styles.name}>{project.name}</h3>
                 <p className={styles.hook}>{project.hook ?? project.tagline}</p>
               </div>
-              {project.status && (
-                <Pill tone={project.status === 'ongoing' ? 'accent' : 'muted'} dot={project.status === 'ongoing'}>
-                  {STATUS_LABEL[project.status]}
-                </Pill>
-              )}
+              {project.status && <StatusPill status={project.status} />}
             </div>
             <ul className={styles.tech}>
               {project.tech.map((t) => (

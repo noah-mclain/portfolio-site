@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowUpRight, Github } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { Pill } from '@/components/ui/Pill';
+import { StatusPill } from '@/components/ui/StatusPill';
 import { projects } from '@/data/projects';
 import { trackEvent } from '@/lib/analytics';
 import styles from './AllProjects.module.css';
@@ -44,11 +45,7 @@ export function AllProjects() {
             )}
             <div className={styles.cardHeader}>
               <h3 className={styles.name}>{project.name}</h3>
-              {project.status === 'ongoing' && (
-                <Pill tone="accent" dot>
-                  Ongoing
-                </Pill>
-              )}
+              {project.status && project.status !== 'shipped' && <StatusPill status={project.status} />}
             </div>
             <p className={styles.tagline}>{project.tagline}</p>
             {project.period && <p className={styles.period}>{project.period}</p>}

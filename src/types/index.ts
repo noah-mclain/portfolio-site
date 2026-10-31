@@ -41,7 +41,7 @@ export interface Project {
   description: string;
   highlights: string[];
   tech: string[];
-  status?: 'ongoing' | 'shipped' | 'archived';
+  status?: 'ongoing' | 'on-hold' | 'shipped' | 'archived';
   featured?: boolean;
   /** Shown on the home page's selected-work grid. */
   spotlight?: boolean;
