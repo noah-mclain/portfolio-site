@@ -48,7 +48,16 @@ export default function App() {
   const isArchive = hash === '#/projects';
 
   useEffect(() => {
-    if (isArchive) window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+    if (isArchive) {
+      window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+      return;
+    }
+    // Leaving the archive for a section link (e.g. "Back home" -> #projects): the section
+    // only exists after this render, so the browser couldn't jump to it on hashchange.
+    const target = window.location.hash.slice(1);
+    if (target && !target.startsWith('/')) {
+      document.getElementById(target)?.scrollIntoView({ behavior: 'instant' as ScrollBehavior });
+    }
   }, [isArchive]);
 
   return (

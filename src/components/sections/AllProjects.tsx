@@ -15,7 +15,7 @@ export function AllProjects() {
         id="all-projects"
         title="All projects"
       >
-      <a href="#/" className={styles.back}>
+      <a href="#projects" className={styles.back}>
         <ArrowLeft size={15} />
         Back home
       </a>
