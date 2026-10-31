@@ -1,6 +1,6 @@
 # portfolio-site
 
-Personal portfolio for Nada Mohamed, AI/ML Engineer.
+Personal portfolio for Nada Ahmed, AI/ML Engineer.
 
 Live at [noah-mclain.github.io/portfolio-site](https://noah-mclain.github.io/portfolio-site/).
 
