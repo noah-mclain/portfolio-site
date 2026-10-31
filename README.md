@@ -1,69 +1,54 @@
-# portfolio-site
+# Nada Ahmed's portfolio
 
-Personal portfolio for Nada Ahmed, AI/ML Engineer.
+My corner of the web for the things I build, the work I've done, and what I'm learning along the way. I'm an AI/ML engineer based in Cairo, mostly working with agents and LLM systems.
 
-Live at [noah-mclain.github.io/portfolio-site](https://noah-mclain.github.io/portfolio-site/).
+The site brings together my projects, experience, and a few ways to get in touch.
 
-## Stack
+**Address:** [nadaa.ddnsfree.com](http://nadaa.ddnsfree.com/)
 
-- **Vite + React 18 + TypeScript**: fast HMR, tiny bundle
-- **CSS Modules**: scoped styles, zero runtime
-- **Lucide React**: tree-shakable icons
+The address is connected to GitHub Pages through Dynu. HTTPS setup is still in progress; the certificate has not been issued yet.
 
-Bundle size: ~57 KB gzipped JS, ~5 KB gzipped CSS.
+## Run it locally
 
-## Develop
+You'll need Node.js 20 and npm.
 
 ```bash
-npm install
-npm run dev      # http://localhost:5173
-npm run build    # production bundle into dist/
-npm run preview  # preview the production build
-npm run lint     # type-check only
+npm ci
+npm run dev
 ```
 
-## Structure
+Vite prints the local address, usually `http://localhost:5173`.
 
-```
-src/
-├── components/
-│   ├── layout/      # Navbar, Footer, ScrollProgress
-│   ├── sections/    # Hero, About, Skills, Experience, Projects, Contact
-│   └── ui/          # Button, Card, Pill, Section, SocialIcon
-├── data/            # Typed content (profile, skills, projects, experience, education)
-├── hooks/           # useScrollReveal, useActiveSection
-├── styles/          # tokens.css, reset.css, globals.css
-└── types/           # Shared TypeScript interfaces
-```
-
-Content lives in `src/data/*.ts`, edit those to update the site, no component changes needed.
-
-## Design tokens
-
-All colors, typography scale, spacing, and motion live in [`src/styles/tokens.css`](src/styles/tokens.css). Type and spacing use `clamp()` so the layout fluidly scales from 320px phones to 4K monitors without breakpoint cliffs.
-
-Breakpoints (mobile-first):
-
-- `< 480px`: single column, condensed contact rows
-- `≥ 480px`: full social labels
-- `≥ 640px`: 2-col skills grid
-- `≥ 700px`: 2-col projects grid
-- `≥ 768px`: desktop nav, 2-col about
-- `≥ 900px`: 2-col contact
-- `≥ 1024px`: 3-col skills
-- `≥ 1100px`: 3-col projects
-- `1280px` container max-width on ultrawide
-
-## Deployment
-
-Hosted on GitHub Pages at [noah-mclain.github.io/portfolio-site](https://noah-mclain.github.io/portfolio-site/). Every push to `main` builds and deploys automatically via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) (Pages source is set to **GitHub Actions** in the repo settings).
-
-### Docker
-
-For hosting anywhere else, the site ships as a container (multi-stage build → nginx):
+To check or preview the production build:
 
 ```bash
-docker compose up --build   # serves on http://localhost:8080
+npm run lint     # TypeScript checks
+npm run build    # writes the site to dist/
+npm run preview  # serves the built site locally
 ```
 
-or `docker build -t portfolio . && docker run -p 8080:80 portfolio`.
+## Finding your way around
+
+Built with React 18, TypeScript, and Vite, with CSS Modules for styling and Lucide for icons.
+
+- [`src/data/`](src/data/) holds the profile, projects, skills, education, and experience. Most content updates happen here.
+- [`src/components/`](src/components/) contains the page sections, navigation, and shared UI.
+- [`src/hooks/`](src/hooks/) handles theme preferences and active navigation.
+- [`src/styles/tokens.css`](src/styles/tokens.css) is the starting point for changing colors, fonts, and spacing.
+- [`public/`](public/) holds files served directly, including the downloadable CV.
+
+## Publishing
+
+GitHub Pages hosts the site. Each push to `main` builds and deploys it through [the deployment workflow](.github/workflows/deploy.yml). In the repository's Pages settings, the source is **GitHub Actions** and the custom domain is `nadaa.ddnsfree.com`.
+
+Dynu manages the DNS records. GitHub handles the TLS certificate once DNS validation and certificate issuance complete; HTTPS enforcement can then be enabled in Pages settings. Because deployment uses GitHub Actions, a `CNAME` file isn't required.
+
+## Running it with Docker
+
+There's also a Docker setup that builds the site and serves it with nginx:
+
+```bash
+docker compose up --build
+```
+
+Open `http://localhost:8080` once the container is running.
