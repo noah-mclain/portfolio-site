@@ -6,14 +6,15 @@ export const profile: Profile = {
   fullName: 'Nada Mohamed',
   title: 'AI/ML Engineer',
   tagline:
-    'I build intelligent agents, fine-tune LLMs, and ship systems that solve real problems — from blockchain payroll rails to autonomous tooling.',
+    'I build intelligent agents, fine-tune LLMs, and ship systems, from blockchain payroll rails to autonomous tooling.',
   bio: [
-    "I'm an AI/ML engineer building intelligent agents, working with LLMs, and turning research into practical software.",
-    "A Computer Science graduate, I built Payramid, an award-winning blockchain payroll platform, and completed internships at SAIB Bank and Dell Technologies.",
+    "I'm an AI/ML engineer who turns research into practical software, mostly agents and LLM systems.",
+    "I graduated in Computer Science with Honors, built Payramid, an award-winning blockchain payroll platform, and interned at SAIB Bank and Dell Technologies.",
   ],
   availability: 'Open to AI/ML roles',
   location: 'Cairo, Egypt',
   resumeUrl: 'Nada-Mohamed-CV.pdf',
+  email: 'nadamo.cs@gmail.com',
 };
 
 export const socials: SocialLink[] = [

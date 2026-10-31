@@ -8,6 +8,7 @@ export interface Profile {
   availability: string;
   location: string;
   resumeUrl: string;
+  email: string;
 }
 
 export interface SocialLink {
