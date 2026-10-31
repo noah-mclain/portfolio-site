@@ -1,3 +1,5 @@
+import financialReports from '@/assets/projects/financial-reports.webp';
+import payramid from '@/assets/projects/payramid.webp';
 import pixelParadise from '@/assets/projects/pixel-paradise.webp';
 import fera5Invaders from '@/assets/projects/fera5-invaders.webp';
 import triviaGame from '@/assets/projects/trivia-game.webp';
@@ -9,6 +11,24 @@ import type { Project } from '@/types';
  * much they show off.
  */
 export const projects: Project[] = [
+  {
+    name: 'Financial Reports Analysis',
+    tagline: 'Source-linked financial statement analysis',
+    hook: 'Every figure links back to the page it came from.',
+    period: 'Sept – Oct 2026',
+    description:
+      'A local app that takes annual or interim financial-report PDFs, finds and extracts the statement pages, and computes metrics with deterministic Decimal rules. Every figure links to a highlighted region of its source page, and anything that fails an identity check is held for review rather than shown as verified.',
+    highlights: [
+      'Statement page location, PDF conversion with provenance, and period, currency and scale structuring',
+      'Deterministic Decimal metrics with accounting identity checks and plain-language review reasons',
+      'Evaluation gates split by issuer, plus native and Docker run profiles',
+    ],
+    tech: ['Python', 'FastAPI', 'Docling', 'MLX', 'Docker'],
+    status: 'shipped',
+    spotlight: true,
+    image: financialReports,
+    repo: 'https://github.com/noah-mclain/financial-reports-analysis-model',
+  },
   {
     name: 'Payramid',
     tagline: 'Blockchain payroll for Egypt',
@@ -25,12 +45,13 @@ export const projects: Project[] = [
     status: 'ongoing',
     featured: true,
     spotlight: true,
+    image: payramid,
   },
   {
     name: 'Jarvis AI Assistant',
     tagline: 'Modular multimodal AI assistant',
     hook: 'Iron Man had one. Now I do too.',
-    period: 'Feb 2025 → present',
+    period: 'Feb 2025 → on hold',
     description:
       'A Jarvis-style assistant with code generation, image captioning, and voice interaction. Supports prompt-based instruction tuning and custom toolchains for autonomous task execution.',
     highlights: [
@@ -38,8 +59,7 @@ export const projects: Project[] = [
       'Integrated NLP, Whisper-based speech recognition, and intelligent agent orchestration',
     ],
     tech: ['Python', 'DeepSeek-Coder', 'FLAN-UL2', 'HuggingFace', 'Whisper'],
-    status: 'ongoing',
-    spotlight: true,
+    status: 'on-hold',
     repo: 'https://github.com/noah-mclain/Jarvis-AI-Assistant',
   },
   {
@@ -139,7 +159,7 @@ export const projects: Project[] = [
 
 /** Home-page picks, in display order. */
 export const spotlightProjects: Project[] = [
+  projects.find((p) => p.name === 'Financial Reports Analysis')!,
   projects.find((p) => p.name === 'Payramid')!,
   projects.find((p) => p.name === 'Pixel Paradise')!,
-  projects.find((p) => p.name === 'Jarvis AI Assistant')!,
 ];
