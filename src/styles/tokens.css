@@ -3,6 +3,8 @@
 :root,
 [data-theme='dark'] {
   color-scheme: dark;
+  /* How strongly the background circuit shows; light mode needs it fainter to keep text clear. */
+  --circuit-opacity: 0.6;
   --color-bg: #0d0a13;
   --color-bg-elevated: #130f1b;
   --color-surface: #17121f;
@@ -24,6 +26,7 @@
 
 [data-theme='light'] {
   color-scheme: light;
+  --circuit-opacity: 0.45;
   --color-bg: #f7f4fa;
   --color-bg-elevated: #fcfafd;
   --color-surface: #ffffff;
@@ -46,6 +49,7 @@
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {
     color-scheme: light;
+    --circuit-opacity: 0.45;
     --color-bg: #f7f4fa;
     --color-bg-elevated: #fcfafd;
     --color-surface: #ffffff;
