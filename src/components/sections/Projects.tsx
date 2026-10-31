@@ -1,3 +1,4 @@
+import { ProjectImage } from '@/components/ui/ProjectImage';
 import { ArrowRight, ArrowUpRight, Github } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
@@ -18,23 +19,20 @@ export function Projects() {
   return (
     <Section
       id="projects"
-      eyebrow="Selected work"
-      title="Projects I've built"
-      description="Current favourites — the full archive is one click away."
+      title="Projects"
     >
       <div className={styles.grid}>
-        {spotlightProjects.map((project, i) => (
+        {spotlightProjects.map((project) => (
           <Card
             key={project.name}
             interactive={Boolean(project.link || project.repo)}
-            className={`reveal ${styles.card} ${project.featured ? styles.featured : ''}`}
-            data-delay={String((i % 5) + 1)}
+            className={styles.card}
           >
+            <ProjectImage image={project.image} video={project.video} name={project.name} />
             <div className={styles.cardHeader}>
               <div>
                 <h3 className={styles.name}>{project.name}</h3>
-                <p className={styles.tagline}>{project.tagline}</p>
-                {project.period && <p className={styles.period}>{project.period}</p>}
+                <p className={styles.hook}>{project.hook ?? project.tagline}</p>
               </div>
               {project.status && (
                 <Pill tone={project.status === 'ongoing' ? 'accent' : 'muted'} dot={project.status === 'ongoing'}>
@@ -42,15 +40,6 @@ export function Projects() {
                 </Pill>
               )}
             </div>
-
-            <p className={styles.description}>{project.description}</p>
-
-            <ul className={styles.highlights}>
-              {project.highlights.map((point) => (
-                <li key={point}>{point}</li>
-              ))}
-            </ul>
-
             <ul className={styles.tech}>
               {project.tech.map((t) => (
                 <li key={t}>
@@ -89,7 +78,7 @@ export function Projects() {
         ))}
       </div>
 
-      <div className={`${styles.more} reveal`} data-delay="1">
+      <div className={styles.more}>
         <Button
           as="a"
           href="#/projects"

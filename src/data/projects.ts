@@ -1,3 +1,7 @@
+import pixelParadise from '@/assets/projects/pixel-paradise.webp';
+import fera5Invaders from '@/assets/projects/fera5-invaders.webp';
+import triviaGame from '@/assets/projects/trivia-game.webp';
+import sclplEditor from '@/assets/projects/sclpl-editor.webp';
 import type { Project } from '@/types';
 
 /**
@@ -8,12 +12,13 @@ export const projects: Project[] = [
   {
     name: 'Payramid',
     tagline: 'Blockchain payroll for Egypt',
+    hook: 'From attendance to payslips, seamlessly.',
     period: 'Sept 2025 → present',
     description:
-      'My graduation project: a blockchain-based payroll platform that lets employers pay salaries instantly over Egypt’s national payment rails, with verifiable payment records — designed to work within local banking regulation.',
+      'My graduation project: a blockchain-based payroll platform that lets employers pay salaries instantly over Egypt’s national payment rails, with verifiable payment records, designed to work within local banking regulation.',
     highlights: [
       'Instant salary disbursement with tamper-evident, verifiable payment records',
-      'Inclusive by design — salary access works even without a smartphone or banking app',
+      'Inclusive by design: salary access works even without a smartphone or banking app',
       'Authored the platform’s SRS and formal test documentation, from requirements through verification',
     ],
     tech: ['Go', 'TypeScript', 'Blockchain', 'Docker'],
@@ -24,6 +29,7 @@ export const projects: Project[] = [
   {
     name: 'Jarvis AI Assistant',
     tagline: 'Modular multimodal AI assistant',
+    hook: 'Iron Man had one. Now I do too.',
     period: 'Feb 2025 → present',
     description:
       'A Jarvis-style assistant with code generation, image captioning, and voice interaction. Supports prompt-based instruction tuning and custom toolchains for autonomous task execution.',
@@ -39,9 +45,10 @@ export const projects: Project[] = [
   {
     name: 'Pixel Paradise',
     tagline: 'Retro arcade gaming website',
+    hook: 'Your childhood arcade, minus the quarters.',
     period: 'May 2024 – Feb 2025',
     description:
-      'A retro-styled web arcade with playable games wrapped in a handcrafted pixel-art interface. Built with a small team — I was a core developer across gameplay and site features.',
+      'A retro-styled web arcade with playable games wrapped in a handcrafted pixel-art interface. Built with a small team; I was a core developer across gameplay and site features.',
     highlights: [
       'Playable arcade games running in the browser',
       'Full-stack build with accounts and score tracking',
@@ -49,7 +56,7 @@ export const projects: Project[] = [
     tech: ['JavaScript', 'PHP', 'HTML', 'CSS', 'Python'],
     status: 'shipped',
     spotlight: true,
-    image: 'https://raw.githubusercontent.com/catsdisownedz/Pixel-Paradise/main/readmeMedia/homepage.png',
+    image: pixelParadise,
     repo: 'https://github.com/catsdisownedz/Pixel-Paradise',
   },
   {
@@ -64,7 +71,7 @@ export const projects: Project[] = [
     ],
     tech: ['Python', 'Pygame', 'TensorFlow', 'PyTorch', 'NumPy'],
     status: 'shipped',
-    image: 'https://raw.githubusercontent.com/noah-mclain/fera5-invaders/main/assets/ReadmeMedia/dekwan1.png',
+    image: fera5Invaders,
     repo: 'https://github.com/noah-mclain/fera5-invaders',
   },
   {
@@ -79,12 +86,13 @@ export const projects: Project[] = [
     ],
     tech: ['Java', 'JavaFX', 'AWS', 'SQL'],
     status: 'shipped',
-    image: 'https://raw.githubusercontent.com/noah-mclain/trivia_game/main/readmeMedia/trivia1.png',
+    image: triviaGame,
     repo: 'https://github.com/noah-mclain/trivia_game',
   },
   {
     name: 'SCLPL Editor',
     tagline: 'Custom code editor with lexer & parser',
+    hook: 'We built our own programming language, then an editor for it.',
     period: 'Nov 2024 – Feb 2025',
     description:
       'A full lexical and syntax analysis pipeline supporting a custom toy language (SCLPL) for educational tooling. Multi-tab IDE with automatic language recognition and syntax highlighting.',
@@ -94,12 +102,13 @@ export const projects: Project[] = [
     ],
     tech: ['Python', 'Tkinter', 'Pillow', 'Graphviz', 'Pytest'],
     status: 'shipped',
-    image: 'https://raw.githubusercontent.com/catsdisownedz/Text-Editor/main/readmeMedia/SCLPL1.png',
+    image: sclplEditor,
     repo: 'https://github.com/catsdisownedz/Text-Editor',
   },
   {
     name: 'OverClocked',
     tagline: 'System monitoring & optimization',
+    hook: 'Know what your machine is really doing.',
     period: 'Dec 2024 – Feb 2025',
     description:
       'A cross-platform system monitoring tool that captures hardware and software performance metrics with logging and visualization. Containerized for repeatable deployment.',
@@ -114,6 +123,7 @@ export const projects: Project[] = [
   {
     name: 'Oribu',
     tagline: 'AI-powered facial recognition',
+    hook: 'A Siamese network that spots flagged faces and raises the alarm.',
     period: 'Jan – Jul 2023',
     description:
       'My first ever project: a facial recognition system built around a Siamese Neural Network for criminal detection. Uses contrastive loss for high-accuracy one-shot face verification with real-time SMS alerts.',

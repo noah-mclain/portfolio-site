@@ -1,3 +1,4 @@
+import { ProjectImage } from '@/components/ui/ProjectImage';
 import { ArrowLeft, ArrowUpRight, Github } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
@@ -12,9 +13,7 @@ export function AllProjects() {
     <div className={styles.page}>
       <Section
         id="all-projects"
-        eyebrow="Archive"
         title="All projects"
-        description="Everything I've built or am still building, newest first."
       >
       <a href="#/" className={styles.back}>
         <ArrowLeft size={15} />
@@ -26,9 +25,9 @@ export function AllProjects() {
           <Card
             key={project.name}
             interactive={Boolean(project.link || project.repo)}
-            className={`reveal ${styles.card}`}
+            className={styles.card}
           >
-            {project.image && (
+            {(project.repo || project.link) ? (
               <a
                 href={project.repo ?? project.link}
                 target="_blank"
@@ -38,13 +37,10 @@ export function AllProjects() {
                 tabIndex={-1}
                 onClick={() => trackEvent(`project_preview_${project.name}`)}
               >
-                <img
-                  src={project.image}
-                  alt={`${project.name} preview`}
-                  className={styles.preview}
-                  loading="lazy"
-                />
+                <ProjectImage image={project.image} video={project.video} name={project.name} />
               </a>
+            ) : (
+              <ProjectImage image={project.image} video={project.video} name={project.name} />
             )}
             <div className={styles.cardHeader}>
               <h3 className={styles.name}>{project.name}</h3>

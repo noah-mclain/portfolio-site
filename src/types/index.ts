@@ -35,6 +35,8 @@ export interface Skill {
 export interface Project {
   name: string;
   tagline: string;
+  /** One-line hook for the home page card. Falls back to the tagline. */
+  hook?: string;
   description: string;
   highlights: string[];
   tech: string[];
@@ -46,6 +48,7 @@ export interface Project {
   period?: string;
   /** Preview screenshot URL (links to the repo when clicked). */
   image?: string;
+  video?: string;
   link?: string;
   repo?: string;
 }
