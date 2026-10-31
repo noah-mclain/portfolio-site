@@ -104,8 +104,21 @@
   color: var(--color-text);
 }
 
-.org a:hover {
+/* The circuit draws this link's underline as a trace from the node. Hover and
+   keyboard focus brighten it; without the circuit it falls back to a text underline. */
+.org a {
+  transition: color 0.2s var(--ease-out);
+}
+
+.org a:hover,
+.org a:focus-visible {
   color: var(--color-accent);
+}
+
+.list:not([data-circuit]) .org a {
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-underline-offset: 5px;
 }
 
 .role {

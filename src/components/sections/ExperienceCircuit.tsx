@@ -6,7 +6,8 @@ import styles from './Experience.module.css';
  * The background circuit's guided cousin. While the Experience list is on
  * screen, a trace leaves from under the last letter of the section title,
  * steps across to the center line at 45° and runs down into each role's node,
- * lighting it as it lands. Each takeaway gets a short branch ending in a pad.
+ * lighting it as it lands. A linked company name is underlined by a trace from
+ * its node, and each takeaway gets a short branch ending in a pad.
  *
  * Routes come straight from the layout, so they are the same on every visit.
  * Drawing follows scroll position and never un-draws.
@@ -80,16 +81,38 @@ function route(list: HTMLElement): Trace[] {
   }
 
   entries.forEach((li, i) => {
-    const body = rel(li.querySelector('[data-body]')!.getBoundingClientRect());
+    const bodyEl = li.querySelector<HTMLElement>('[data-body]')!;
+    const body = rel(bodyEl.getBoundingClientRect());
+    // Hidden roles sit a few px low until revealed; measure text where it will settle.
+    const lift = new DOMMatrix(getComputedStyle(bodyEl).transform).m42;
     const side = narrow || (body.l + body.r) / 2 > cx ? 1 : -1;
     const edge = side < 0 ? body.r + 10 : body.l - 10;
     const year = li.querySelector('[data-year]');
     let y = year ? rel(year.getBoundingClientRect()).b : nodes[i].b;
 
+    // A linked company name gets an underline that leaves the node's edge, so it reads as a link.
+    const link = li.querySelector('[data-org-link]');
+    if (link) {
+      range.selectNodeContents(link);
+      const lines = range.getClientRects();
+      const name = rel(lines[lines.length - 1] ?? link.getBoundingClientRect());
+      const n = nodes[i];
+      // Unscaled radius: the node is shrunk until the trace reaches it.
+      const R = li.querySelector<HTMLElement>('[data-node]')!.offsetWidth / 2;
+      const ny = (n.t + n.b) / 2;
+      const uy = Math.round(name.b - lift);
+      // Leave the circle where the underline's height meets it, or jog to it at 45°.
+      const sy = Math.max(ny - R * 0.7, Math.min(uy, ny + R * 0.7));
+      const pts: Pt[] = [[cx + side * Math.sqrt(R * R - (sy - ny) ** 2), sy]];
+      if (uy !== sy) pts.push([pts[0][0] + side * Math.abs(uy - sy), uy]);
+      pts.push([side > 0 ? name.r + 8 : name.l - 8, uy]); // end pad clear of the text
+      traces.push({ pts, start: 'dot', padEnd: true });
+    }
+
     for (const el of li.querySelectorAll<HTMLElement>('[data-takeaway]')) {
       range.selectNodeContents(el);
       const r = rel(range.getClientRects()[0] ?? el.getBoundingClientRect());
-      const yj = Math.max(y, Math.round((r.t + r.b) / 2) - J);
+      const yj = Math.max(y, Math.round((r.t + r.b) / 2 - lift) - J);
       traces.push({ pts: [[cx, y], [cx, yj]] });
       traces.push({
         pts: [[cx, yj], [cx + side * J, yj + J], [edge, yj + J]],

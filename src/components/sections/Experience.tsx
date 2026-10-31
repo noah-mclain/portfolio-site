@@ -40,7 +40,7 @@ export function Experience() {
             <div className={styles.body} data-body>
               <h3 className={styles.org}>
                 {entry.url ? (
-                  <a href={entry.url} target="_blank" rel="noreferrer">
+                  <a href={entry.url} target="_blank" rel="noreferrer" data-org-link>
                     {entry.organization}
                   </a>
                 ) : (
