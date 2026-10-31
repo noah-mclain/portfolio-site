@@ -1,40 +1,34 @@
 import { ArrowRight, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
-import { Pill } from '@/components/ui/Pill';
 import { profile } from '@/data/profile';
-import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { trackEvent } from '@/lib/analytics';
 import portrait from '@/assets/portrait.png';
 import styles from './Hero.module.css';
 
 export function Hero() {
-  const ref = useScrollReveal<HTMLElement>();
-
   return (
-    <section id="home" ref={ref} className={styles.hero}>
-      <div className={styles.glow} aria-hidden />
+    <section id="home" className={styles.hero}>
 
       <div className={`container ${styles.inner}`}>
         <div className={styles.content}>
-          <div className={`${styles.pillRow} reveal`}>
-            <Pill tone="accent" dot>
-              {profile.availability}
-            </Pill>
-          </div>
+          <p className={styles.status}>
+            <span aria-hidden />
+            {profile.availability}
+          </p>
 
-          <h1 className={`${styles.headline} reveal`} data-delay="1">
+          <h1 className={styles.headline}>
             Hey, I'm <span className={styles.name}>{profile.firstName}</span>.
           </h1>
 
-          <p className={`${styles.title} reveal`} data-delay="2">
+          <p className={styles.title}>
             {profile.title}
           </p>
 
-          <p className={`${styles.tagline} reveal`} data-delay="3">
+          <p className={styles.tagline}>
             {profile.tagline}
           </p>
 
-          <div className={`${styles.actions} reveal`} data-delay="4">
+          <div className={styles.actions}>
             <Button as="a" href="#projects" variant="primary" size="lg" iconRight={<ArrowRight size={18} />}>
               View my work
             </Button>
@@ -53,8 +47,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className={`${styles.portraitWrap} reveal`} data-delay="2">
-          <div className={styles.portraitGlow} aria-hidden />
+        <div className={styles.portraitWrap}>
           <img
             src={portrait}
             alt="Nada Mohamed"
@@ -65,10 +58,6 @@ export function Hero() {
         </div>
       </div>
 
-      <a href="#about" className={styles.scrollHint} aria-label="Scroll to next section">
-        <span className={styles.scrollLabel}>scroll</span>
-        <span className={styles.scrollLine} aria-hidden />
-      </a>
     </section>
   );
 }

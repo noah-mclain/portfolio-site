@@ -1,49 +1,37 @@
-.panel {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
-}
-
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  padding-bottom: var(--space-4);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.filterBtn {
-  padding: 0.4rem 0.85rem;
-  border-radius: var(--radius-pill);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-text-muted);
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  cursor: pointer;
-  transition:
-    color var(--duration-base) var(--ease-out),
-    background var(--duration-base) var(--ease-out),
-    border-color var(--duration-base) var(--ease-out);
-}
-
-.filterBtn:hover {
-  color: var(--color-text);
-  border-color: var(--glass-border-strong);
-}
-
-.filterActive {
-  color: var(--color-text);
-  background: var(--color-accent-bg-strong);
-  border-color: var(--color-accent);
-  box-shadow: 0 0 12px var(--color-accent-glow);
-}
-
 .list {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-  /* Keeps the section from jumping when a small filter is selected. */
-  min-height: 96px;
   align-content: flex-start;
+}
+
+.picker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-text-muted);
+}
+
+.picker select {
+  appearance: none;
+  min-width: 13rem;
+  padding: 0.55rem 2.4rem 0.55rem 0.9rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+
+.picker select:hover,
+.picker select:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.picker svg {
+  position: absolute;
+  right: 0.8rem;
+  pointer-events: none;
 }

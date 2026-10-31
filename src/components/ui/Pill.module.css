@@ -16,8 +16,6 @@
   background: var(--color-accent-bg);
   color: var(--color-accent-soft);
   border-color: var(--color-accent-bg-strong);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
 }
 
 [data-theme='light'] .accent {
@@ -25,11 +23,9 @@
 }
 
 .neutral {
-  background: var(--glass-bg);
+  background: var(--color-surface);
   color: var(--color-text-muted);
-  border-color: var(--glass-border);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  border-color: var(--color-border);
 }
 
 .muted {
@@ -43,7 +39,6 @@
   height: 6px;
   border-radius: 50%;
   background: var(--color-accent);
-  box-shadow: 0 0 8px var(--color-accent-glow);
   animation: pulse 2.4s var(--ease-in-out) infinite;
 }
 
@@ -52,9 +47,3 @@
   50% { opacity: 0.45; }
 }
 
-@supports not (backdrop-filter: blur(1px)) {
-  .accent,
-  .neutral {
-    background: var(--color-surface);
-  }
-}

@@ -1,4 +1,7 @@
-import { ArrowUpRight, GraduationCap, Languages, MapPin, Rocket, Sparkles } from 'lucide-react';
+import type { ReactNode } from 'react';
+import { ArrowUpRight, GraduationCap, Languages, MapPin } from 'lucide-react';
+import { LogoMark } from '@/components/ui/LogoMark';
+import { Medal } from '@/components/ui/Medal';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { profile } from '@/data/profile';
@@ -7,41 +10,62 @@ import styles from './About.module.css';
 
 const degree = education[0];
 
-const facts = [
+const educationIcon = degree.logos ? (
+  <span className={styles.logoPair}>
+    {degree.logos.map((logo, i) => (
+      <span key={logo} className={styles.logoPair}>
+        {i > 0 && <span aria-hidden>×</span>}
+        <LogoMark src={logo} size={22} />
+      </span>
+    ))}
+  </span>
+) : (
+  <GraduationCap size={17} />
+);
+
+const facts: { icon: ReactNode; label: string; value: ReactNode; wide?: boolean }[] = [
   {
-    icon: GraduationCap,
+    icon: educationIcon,
+    wide: Boolean(degree.logos),
     label: 'Education',
-    value: `${degree.degree} — AAST × ${degree.partnerInstitution}`,
+    value: (
+      <>
+        <span className={styles.line}>{degree.degree}</span>
+        {degree.major && <span className={styles.line}>Major in {degree.major}</span>}
+        {degree.gpa && <span className={styles.line}>GPA {degree.gpa}/4.0</span>}
+        {degree.honors && (
+          <span className={styles.line}>
+            Graduated with <strong>Honors</strong>
+          </span>
+        )}
+      </>
+    ),
   },
-  { icon: MapPin, label: 'Based in', value: profile.location },
+  { icon: <MapPin size={17} />, label: 'Based in', value: profile.location },
   {
-    icon: Rocket,
-    label: 'Current project',
-    value: 'Payramid — blockchain payroll on national rails · Sept 2025 → present',
-  },
-  { icon: Sparkles, label: 'Focus', value: 'LLMs, agents & applied ML' },
-  {
-    icon: Languages,
+    icon: <Languages size={17} />,
     label: 'Languages',
-    value: languages.map((l) => `${l.name} (${l.proficiency.toLowerCase()})`).join(' · '),
+    value: languages.map((l) => (
+      <span key={l.name} className={styles.line}>
+        {l.name} ({l.proficiency.toLowerCase()})
+      </span>
+    )),
   },
 ];
 
 export function About() {
   return (
-    <Section id="about" eyebrow="About" title="A bit about me" align="left">
+    <Section id="about" title="About">
       <div className={styles.content}>
-        <div className={`${styles.copy} reveal`} data-delay="3">
+        <div className={styles.copy}>
           <p>{profile.bio.join(' ')}</p>
         </div>
 
-        <Card className="reveal" data-delay="4">
+        <Card>
           <ul className={styles.factList}>
-            {facts.map(({ icon: Icon, label, value }) => (
+            {facts.map(({ icon, label, value, wide }) => (
               <li key={label} className={styles.fact}>
-                <span className={styles.factIcon}>
-                  <Icon size={17} />
-                </span>
+                <span className={`${styles.factIcon} ${wide ? styles.factIconWide : ''}`}>{icon}</span>
                 <div>
                   <p className={styles.factLabel}>{label}</p>
                   <p className={styles.factValue}>{value}</p>
@@ -51,14 +75,18 @@ export function About() {
           </ul>
         </Card>
 
-        <Card className="reveal" data-delay="5">
+        <Card>
           <h3 className={styles.certsTitle}>Awards & certifications</h3>
           <ul className={styles.awardList}>
             {awards.map((award) => (
               <li key={award.name} className={styles.award}>
-                <p className={styles.certName}>{award.name}</p>
-                <p className={styles.certIssuer}>{award.issuer}</p>
-                <p className={styles.awardDescription}>{award.description}</p>
+                <span className={styles.itemHead}>
+                  <Medal place={award.place} size={32} />
+                  <span>
+                    <p className={styles.certName}>{award.name}</p>
+                    <p className={styles.certIssuer}>{award.issuer}</p>
+                  </span>
+                </span>
                 <a
                   href={award.source}
                   className={styles.awardLink}
@@ -73,9 +101,12 @@ export function About() {
           </ul>
           <ul className={styles.certList}>
             {certifications.map((cert) => (
-              <li key={cert.name}>
-                <p className={styles.certName}>{cert.name}</p>
-                <p className={styles.certIssuer}>{cert.issuer}</p>
+              <li key={cert.name} className={styles.itemHead}>
+                {cert.logo && <LogoMark src={cert.logo} size={30} className={styles.certLogo} />}
+                <span>
+                  <p className={styles.certName}>{cert.name}</p>
+                  <p className={styles.certIssuer}>{cert.issuer}</p>
+                </span>
               </li>
             ))}
           </ul>

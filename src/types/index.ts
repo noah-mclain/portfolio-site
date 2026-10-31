@@ -8,6 +8,7 @@ export interface Profile {
   availability: string;
   location: string;
   resumeUrl: string;
+  email: string;
 }
 
 export interface SocialLink {
@@ -35,6 +36,8 @@ export interface Skill {
 export interface Project {
   name: string;
   tagline: string;
+  /** One-line hook for the home page card. Falls back to the tagline. */
+  hook?: string;
   description: string;
   highlights: string[];
   tech: string[];
@@ -46,6 +49,7 @@ export interface Project {
   period?: string;
   /** Preview screenshot URL (links to the repo when clicked). */
   image?: string;
+  video?: string;
   link?: string;
   repo?: string;
 }
@@ -53,11 +57,14 @@ export interface Project {
 export interface ExperienceEntry {
   role: string;
   organization: string;
+  url?: string;
+  logo?: string;
+  /** Key points, one line each; **double asterisks** bold a term. */
+  takeaways: string[];
   context?: string;
   location: string;
   startDate: string;
   endDate: string;
-  highlights: string[];
 }
 
 export interface EducationEntry {
@@ -68,15 +75,23 @@ export interface EducationEntry {
   startDate: string;
   endDate: string;
   gpa?: string;
+  major?: string;
+  /** Institution logos, drawn in the text color. */
+  logos?: string[];
+  honors?: boolean;
 }
 
 export interface Certification {
   name: string;
   issuer: string;
+  /** Issuer's logo, drawn in the text color. */
+  logo?: string;
 }
 
 export interface Award {
   name: string;
+  /** Finishing place, shown as a medal. */
+  place: number;
   issuer: string;
   description: string;
   source: string;

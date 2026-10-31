@@ -1,4 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
+import {
+  applyTraceStyle,
+  DIRS,
+  GRID,
+  junctionDot as dot,
+  recolor,
+  MIN_RUN,
+  px,
+  ringPad as pad,
+} from '@/lib/circuit';
 import styles from './CircuitBackground.module.css';
 
 /**
@@ -10,29 +20,15 @@ import styles from './CircuitBackground.module.css';
  *
  * The drawing budget each frame scales with scroll velocity: fast scrolling
  * routes traces quickly, idling lets the board build almost imperceptibly.
- * Drawing is incremental onto a persistent canvas — each frame strokes only
+ * Drawing is incremental onto a persistent canvas, each frame strokes only
  * the new pixels, so per-frame cost stays tiny.
  */
 
-const GRID = 16;
 const MAX_WALKERS = 6;
-const IDLE_BUDGET = 0.4; // px per frame when the page is still
-const SCROLL_GAIN = 1.1; // extra px per frame per px/frame of scroll speed
-const MAX_BUDGET = 170;
+const IDLE_BUDGET = 0.8; // px per frame when the page is still
+const SCROLL_GAIN = 2.4; // extra px per frame per px/frame of scroll speed
+const MAX_BUDGET = 260;
 const FILL_RATIO = 0.3; // fraction of grid cells that ends up traced
-const MIN_RUN = 3; // cells to travel straight before another bend is allowed
-
-// 8 compass directions; even indices are orthogonal, odd are diagonal.
-const DIRS = [
-  [1, 0],
-  [1, 1],
-  [0, 1],
-  [-1, 1],
-  [-1, 0],
-  [-1, -1],
-  [0, -1],
-  [1, -1],
-];
 
 interface Walker {
   /** Current position in grid cells. */
@@ -64,7 +60,6 @@ function createRenderer(canvas: HTMLCanvasElement) {
   let walkers: Walker[] = [];
 
   const key = (cx: number, cy: number) => cy * 4096 + cx;
-  const px = (c: number) => c * GRID + GRID / 2;
   const free = (cx: number, cy: number) =>
     cx >= 1 && cy >= 1 && cx < cols - 1 && cy < rows - 1 && !occupied.has(key(cx, cy));
 
@@ -73,17 +68,8 @@ function createRenderer(canvas: HTMLCanvasElement) {
     net.push(key(cx, cy));
   }
 
-  function ringPad(cx: number, cy: number) {
-    ctx!.beginPath();
-    ctx!.arc(px(cx), px(cy), 3.2, 0, Math.PI * 2);
-    ctx!.stroke();
-  }
-
-  function junctionDot(cx: number, cy: number) {
-    ctx!.beginPath();
-    ctx!.arc(px(cx), px(cy), 1.8, 0, Math.PI * 2);
-    ctx!.fill();
-  }
+  const ringPad = (cx: number, cy: number) => pad(ctx!, px(cx), px(cy));
+  const junctionDot = (cx: number, cy: number) => dot(ctx!, px(cx), px(cy));
 
   function initWalker(w: Walker, cx: number, cy: number, dir: number) {
     Object.assign(w, {
@@ -174,13 +160,7 @@ function createRenderer(canvas: HTMLCanvasElement) {
     ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx!.clearRect(0, 0, width, height);
 
-    const style = getComputedStyle(document.documentElement);
-    const accent = style.getPropertyValue('--color-accent').trim() || '#a78bfa';
-    ctx!.strokeStyle = accent;
-    ctx!.fillStyle = accent;
-    ctx!.lineWidth = 1;
-    ctx!.lineCap = 'round';
-    ctx!.globalAlpha = 0.15;
+    applyTraceStyle(ctx!, 0.15);
 
     cols = Math.ceil(width / GRID);
     rows = Math.ceil(height / GRID);
@@ -238,7 +218,33 @@ function createRenderer(canvas: HTMLCanvasElement) {
     return drawn < cap;
   }
 
-  return { reset, step, drawInstant: () => step(cap * 0.5) };
+  /** Fit a new window size while keeping everything already drawn. */
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const keep = document.createElement('canvas');
+    keep.width = canvas.width;
+    keep.height = canvas.height;
+    keep.getContext('2d')!.drawImage(canvas, 0, 0);
+
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    ctx!.setTransform(1, 0, 0, 1, 0, 0);
+    ctx!.drawImage(keep, 0, 0);
+    ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+    applyTraceStyle(ctx!, 0.15);
+
+    cols = Math.ceil(window.innerWidth / GRID);
+    rows = Math.ceil(window.innerHeight / GRID);
+    cap = Math.max(cap, cols * rows * FILL_RATIO * GRID);
+  }
+
+  return {
+    reset,
+    step,
+    resize,
+    recolor: () => recolor(ctx!),
+    drawInstant: () => step(cap * 0.5),
+  };
 }
 
 export default function CircuitBackground() {
@@ -255,10 +261,14 @@ export default function CircuitBackground() {
     renderer.reset();
     setVisible(true);
 
+    // The board only resets on a page load: theme flips recolor it, resizes keep it.
+    const observer = new MutationObserver(() => renderer.recolor());
+    observer.observe(document.documentElement, { attributeFilter: ['data-theme'] });
+
     if (reduced) {
       // No animation: etch a partial board once and leave it static.
       renderer.drawInstant();
-      return;
+      return () => observer.disconnect();
     }
 
     let raf = 0;
@@ -272,21 +282,9 @@ export default function CircuitBackground() {
       lastY = y;
 
       const budget = Math.min(IDLE_BUDGET + velocity * SCROLL_GAIN, MAX_BUDGET);
-      if (renderer.step(budget)) raf = requestAnimationFrame(frame);
+      raf = renderer.step(budget) ? requestAnimationFrame(frame) : 0;
     };
     raf = requestAnimationFrame(frame);
-
-    const restart = () => {
-      cancelAnimationFrame(raf);
-      renderer.reset();
-      lastY = window.scrollY;
-      velocity = 0;
-      raf = requestAnimationFrame(frame);
-    };
-
-    // Rebuild on theme flips (trace color changes) and real size changes.
-    const observer = new MutationObserver(restart);
-    observer.observe(document.documentElement, { attributeFilter: ['data-theme'] });
 
     let lastW = window.innerWidth;
     let lastH = window.innerHeight;
@@ -295,7 +293,8 @@ export default function CircuitBackground() {
       if (Math.abs(window.innerWidth - lastW) > 64 || Math.abs(window.innerHeight - lastH) > 160) {
         lastW = window.innerWidth;
         lastH = window.innerHeight;
-        restart();
+        renderer.resize();
+        if (!raf) raf = requestAnimationFrame(frame);
       }
     };
     window.addEventListener('resize', onResize);

@@ -17,7 +17,7 @@ const DOCK_ICONS: Record<string, LucideIcon> = {
   contact: Mail,
 };
 
-/* Dock geometry — keep in sync with the CSS. */
+/* Dock geometry, keep in sync with the CSS. */
 const DOCK_ITEM = 42;
 const DOCK_GAP = 4;
 const DOCK_PAD = 6;

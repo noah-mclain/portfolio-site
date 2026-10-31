@@ -2,7 +2,6 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { SocialRail } from '@/components/layout/SocialRail';
 import { Footer } from '@/components/layout/Footer';
-import { ScrollProgress } from '@/components/layout/ScrollProgress';
 import { Hero } from '@/components/sections/Hero';
 import { About } from '@/components/sections/About';
 import { Skills } from '@/components/sections/Skills';
@@ -11,7 +10,7 @@ import { Projects } from '@/components/sections/Projects';
 import { Contact } from '@/components/sections/Contact';
 import { AllProjects } from '@/components/sections/AllProjects';
 
-// Decorative only — fetched and mounted once the main thread is idle so it
+// Decorative only, fetched and mounted once the main thread is idle so it
 // never competes with first paint.
 const CircuitBackground = lazy(() => import('@/components/layout/CircuitBackground'));
 
@@ -49,7 +48,16 @@ export default function App() {
   const isArchive = hash === '#/projects';
 
   useEffect(() => {
-    if (isArchive) window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+    if (isArchive) {
+      window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+      return;
+    }
+    // Leaving the archive for a section link (e.g. "Back home" -> #projects): the section
+    // only exists after this render, so the browser couldn't jump to it on hashchange.
+    const target = window.location.hash.slice(1);
+    if (target && !target.startsWith('/')) {
+      document.getElementById(target)?.scrollIntoView({ behavior: 'instant' as ScrollBehavior });
+    }
   }, [isArchive]);
 
   return (
@@ -59,7 +67,6 @@ export default function App() {
           <CircuitBackground />
         </Suspense>
       )}
-      <ScrollProgress />
       <Navbar />
       <SocialRail />
       <main>

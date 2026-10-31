@@ -1,15 +1,14 @@
 # portfolio-site
 
-Personal portfolio for Nada Mohamed — AI/ML Engineer.
+Personal portfolio for Nada Mohamed, AI/ML Engineer.
 
 Live at [noah-mclain.github.io/portfolio-site](https://noah-mclain.github.io/portfolio-site/).
 
 ## Stack
 
-- **Vite + React 18 + TypeScript** — fast HMR, tiny bundle
-- **CSS Modules** — scoped styles, zero runtime
-- **Lucide React** — tree-shakable icons
-- **IntersectionObserver** — DIY scroll reveals (no animation lib)
+- **Vite + React 18 + TypeScript**: fast HMR, tiny bundle
+- **CSS Modules**: scoped styles, zero runtime
+- **Lucide React**: tree-shakable icons
 
 Bundle size: ~57 KB gzipped JS, ~5 KB gzipped CSS.
 
@@ -37,7 +36,7 @@ src/
 └── types/           # Shared TypeScript interfaces
 ```
 
-Content lives in `src/data/*.ts` — edit those to update the site, no component changes needed.
+Content lives in `src/data/*.ts`, edit those to update the site, no component changes needed.
 
 ## Design tokens
 
@@ -45,14 +44,14 @@ All colors, typography scale, spacing, and motion live in [`src/styles/tokens.cs
 
 Breakpoints (mobile-first):
 
-- `< 480px` — single column, condensed contact rows
-- `≥ 480px` — full social labels
-- `≥ 640px` — 2-col skills grid
-- `≥ 700px` — 2-col projects grid
-- `≥ 768px` — desktop nav, 2-col about
-- `≥ 900px` — 2-col contact
-- `≥ 1024px` — 3-col skills
-- `≥ 1100px` — 3-col projects
+- `< 480px`: single column, condensed contact rows
+- `≥ 480px`: full social labels
+- `≥ 640px`: 2-col skills grid
+- `≥ 700px`: 2-col projects grid
+- `≥ 768px`: desktop nav, 2-col about
+- `≥ 900px`: 2-col contact
+- `≥ 1024px`: 3-col skills
+- `≥ 1100px`: 3-col projects
 - `1280px` container max-width on ultrawide
 
 ## Deployment
