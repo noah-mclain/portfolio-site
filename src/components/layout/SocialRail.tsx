@@ -9,11 +9,13 @@ import styles from './SocialRail.module.css';
  * covers content; hovering (or keyboard focus) unfolds the channels.
  * No handles or numbers in plain view.
  *
- * When the outro section scrolls into view the rail unfolds on its own —
+ * When the outro section scrolls into view the rail unfolds on its own;
  * the closing copy points at it instead of repeating the links.
  */
 export function SocialRail() {
   const [open, setOpen] = useState(false);
+  // Viewport y of the contact block's center, so the open rail sits level with it.
+  const [y, setY] = useState<number | null>(null);
 
   // Check the outro's position on each scroll frame instead of holding an
   // IntersectionObserver on the node: the outro remounts when the route
@@ -28,7 +30,11 @@ export function SocialRail() {
         return;
       }
       const rect = outro.getBoundingClientRect();
-      setOpen(rect.top < window.innerHeight * 0.7 && rect.bottom > window.innerHeight * 0.3);
+      const isOpen = rect.top < window.innerHeight * 0.7 && rect.bottom > window.innerHeight * 0.3;
+      setOpen(isOpen);
+      const block = (outro.firstElementChild ?? outro).getBoundingClientRect();
+      const margin = 120;
+      setY(isOpen ? Math.min(window.innerHeight - margin, Math.max(margin, block.top + block.height / 2)) : null);
     };
     const schedule = () => {
       if (!raf) raf = requestAnimationFrame(check);
@@ -44,7 +50,11 @@ export function SocialRail() {
   }, []);
 
   return (
-    <aside className={`${styles.rail} ${open ? styles.open : ''}`} aria-label="Contact links">
+    <aside
+      className={`${styles.rail} ${open ? styles.open : ''}`}
+      style={y === null ? undefined : { top: y }}
+      aria-label="Contact links"
+    >
       <span className={styles.toggle} aria-hidden>
         <AtSign size={18} />
       </span>

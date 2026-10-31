@@ -2,7 +2,6 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { SocialRail } from '@/components/layout/SocialRail';
 import { Footer } from '@/components/layout/Footer';
-import { ScrollProgress } from '@/components/layout/ScrollProgress';
 import { Hero } from '@/components/sections/Hero';
 import { About } from '@/components/sections/About';
 import { Skills } from '@/components/sections/Skills';
@@ -11,7 +10,7 @@ import { Projects } from '@/components/sections/Projects';
 import { Contact } from '@/components/sections/Contact';
 import { AllProjects } from '@/components/sections/AllProjects';
 
-// Decorative only — fetched and mounted once the main thread is idle so it
+// Decorative only, fetched and mounted once the main thread is idle so it
 // never competes with first paint.
 const CircuitBackground = lazy(() => import('@/components/layout/CircuitBackground'));
 
@@ -59,7 +58,6 @@ export default function App() {
           <CircuitBackground />
         </Suspense>
       )}
-      <ScrollProgress />
       <Navbar />
       <SocialRail />
       <main>
