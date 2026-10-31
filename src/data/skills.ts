@@ -1,6 +1,6 @@
 import type { Skill, SkillTag } from '@/types';
 
-/** Filter order shown in the Skills section. */
+/** Category order shown in the Skills section. */
 export const skillFilters: SkillTag[] = [
   'Programming Languages',
   'Machine Learning & AI',
