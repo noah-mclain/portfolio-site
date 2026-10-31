@@ -1,48 +1,72 @@
+import { Fragment, useRef } from 'react';
+import { LogoMark } from '@/components/ui/LogoMark';
 import { Section } from '@/components/ui/Section';
-import { Pill } from '@/components/ui/Pill';
 import { experience } from '@/data/experience';
+import { ExperienceCircuit } from './ExperienceCircuit';
 import styles from './Experience.module.css';
 
-export function Experience() {
+/** Renders **bold** segments in a takeaway line. */
+function Emphasis({ text }: { text: string }) {
   return (
-    <Section
-      id="experience"
-      eyebrow="Journey"
-      title="Where I've worked"
-      description="From classrooms to ML labs to enterprise — the throughline is building things that ship."
-    >
-      <ol className={styles.timeline}>
-        {experience.map((entry, i) => (
-          <li key={`${entry.organization}-${entry.startDate}`} className={`${styles.entry} reveal`} data-delay={String((i % 5) + 1)}>
-            <div className={styles.marker}>
-              <span className={styles.dot} aria-hidden />
-              <span className={styles.year}>{entry.startDate.split(' ').pop()}</span>
+    <>
+      {text.split('**').map((part, i) => (
+        <Fragment key={i}>{i % 2 ? <strong>{part}</strong> : part}</Fragment>
+      ))}
+    </>
+  );
+}
+
+export function Experience() {
+  const listRef = useRef<HTMLOListElement>(null);
+
+  return (
+    <Section id="experience" title="Experience">
+      <div className={styles.wrap}>
+        <ExperienceCircuit listRef={listRef} />
+        <ol ref={listRef} className={styles.list}>
+        {experience.map((entry) => (
+          <li key={`${entry.organization}-${entry.startDate}`} className={styles.entry}>
+            <div className={styles.rail}>
+              <span className={styles.node} data-node>
+                {entry.logo ? (
+                  <LogoMark src={entry.logo} size={34} />
+                ) : (
+                  <span className={styles.initials}>{entry.organization}</span>
+                )}
+              </span>
+              <span className={styles.year} data-year>{entry.startDate.split(' ').pop()}</span>
             </div>
 
-            <div className={styles.body}>
-              <header className={styles.header}>
-                <h3 className={styles.role}>{entry.role}</h3>
-                <p className={styles.org}>
-                  {entry.organization}
-                  {entry.context ? <span className={styles.context}> · {entry.context}</span> : null}
-                </p>
-                <div className={styles.meta}>
-                  <Pill tone="accent">
-                    {entry.startDate} – {entry.endDate}
-                  </Pill>
-                  <Pill>{entry.location}</Pill>
-                </div>
-              </header>
+            <div className={styles.body} data-body>
+              <h3 className={styles.org}>
+                {entry.url ? (
+                  <a href={entry.url} target="_blank" rel="noreferrer">
+                    {entry.organization}
+                  </a>
+                ) : (
+                  entry.organization
+                )}
+              </h3>
+              <p className={styles.role}>
+                {entry.role}
+                {entry.context ? ` · ${entry.context}` : ''}
+              </p>
+              <p className={styles.dates}>
+                {entry.startDate} – {entry.endDate}
+              </p>
 
-              <ul className={styles.bullets}>
-                {entry.highlights.map((point) => (
-                  <li key={point}>{point}</li>
+              <ul className={styles.takeaways}>
+                {entry.takeaways.map((line) => (
+                  <li key={line} data-takeaway>
+                    <Emphasis text={line} />
+                  </li>
                 ))}
               </ul>
             </div>
           </li>
         ))}
-      </ol>
+        </ol>
+      </div>
     </Section>
   );
 }

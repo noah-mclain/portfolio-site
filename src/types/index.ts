@@ -53,11 +53,14 @@ export interface Project {
 export interface ExperienceEntry {
   role: string;
   organization: string;
+  url?: string;
+  logo?: string;
+  /** Key points, one line each; **double asterisks** bold a term. */
+  takeaways: string[];
   context?: string;
   location: string;
   startDate: string;
   endDate: string;
-  highlights: string[];
 }
 
 export interface EducationEntry {
