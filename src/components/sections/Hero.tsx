@@ -50,7 +50,7 @@ export function Hero() {
         <div className={styles.portraitWrap}>
           <img
             src={portrait}
-            alt="Nada Mohamed"
+            alt="Nada Ahmed"
             className={styles.portrait}
             width={1120}
             height={1400}
