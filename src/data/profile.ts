@@ -26,8 +26,8 @@ export const socials: SocialLink[] = [
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/nada-mohamed-300305ma/",
-    handle: "nada-mohamed",
+    href: "https://www.linkedin.com/in/nada-ahmed-300305ma/",
+    handle: "nada-ahmed",
     icon: "linkedin",
   },
 ];
