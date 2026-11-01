@@ -1,6 +1,6 @@
 .rail {
   position: fixed;
-  right: clamp(10px, 1.6vw, 26px);
+  right: max(10px, calc((100vw - var(--container-max)) / 2 - 64px));
   top: 50%;
   transform: translateY(-50%);
   z-index: var(--z-nav);

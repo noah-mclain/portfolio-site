@@ -42,10 +42,12 @@ export function SocialRail() {
     check();
     window.addEventListener('scroll', schedule, { passive: true });
     window.addEventListener('hashchange', schedule);
+    window.addEventListener('resize', schedule);
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener('scroll', schedule);
       window.removeEventListener('hashchange', schedule);
+      window.removeEventListener('resize', schedule);
     };
   }, []);
 

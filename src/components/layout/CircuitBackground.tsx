@@ -58,6 +58,9 @@ function createRenderer(canvas: HTMLCanvasElement) {
   let occupied = new Set<number>();
   let net: number[] = []; // cells already traced, sampled for branching
   let walkers: Walker[] = [];
+  let width = 0;
+  let height = 0;
+  let pixelRatio = 1;
 
   const key = (cx: number, cy: number) => cy * 4096 + cx;
   const free = (cx: number, cy: number) =>
@@ -153,10 +156,13 @@ function createRenderer(canvas: HTMLCanvasElement) {
 
   function reset() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+    width = window.innerWidth;
+    height = window.innerHeight;
+    pixelRatio = dpr;
     canvas.width = width * dpr;
     canvas.height = height * dpr;
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
     ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx!.clearRect(0, 0, width, height);
 
@@ -218,23 +224,31 @@ function createRenderer(canvas: HTMLCanvasElement) {
     return drawn < cap;
   }
 
-  /** Fit a new window size while keeping everything already drawn. */
+  /** Grow the board without ever clipping artwork when the viewport shrinks. */
   function resize() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const nextWidth = Math.max(width, window.innerWidth);
+    const nextHeight = Math.max(height, window.innerHeight);
+    if (nextWidth === width && nextHeight === height && dpr === pixelRatio) return;
+
     const keep = document.createElement('canvas');
     keep.width = canvas.width;
     keep.height = canvas.height;
     keep.getContext('2d')!.drawImage(canvas, 0, 0);
 
-    canvas.width = window.innerWidth * dpr;
-    canvas.height = window.innerHeight * dpr;
-    ctx!.setTransform(1, 0, 0, 1, 0, 0);
-    ctx!.drawImage(keep, 0, 0);
+    canvas.width = nextWidth * dpr;
+    canvas.height = nextHeight * dpr;
+    canvas.style.width = `${nextWidth}px`;
+    canvas.style.height = `${nextHeight}px`;
     ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx!.drawImage(keep, 0, 0, width, height);
     applyTraceStyle(ctx!, 0.15);
+    width = nextWidth;
+    height = nextHeight;
+    pixelRatio = dpr;
 
-    cols = Math.ceil(window.innerWidth / GRID);
-    rows = Math.ceil(window.innerHeight / GRID);
+    cols = Math.ceil(width / GRID);
+    rows = Math.ceil(height / GRID);
     cap = Math.max(cap, cols * rows * FILL_RATIO * GRID);
   }
 
@@ -268,7 +282,11 @@ export default function CircuitBackground() {
     if (reduced) {
       // No animation: etch a partial board once and leave it static.
       renderer.drawInstant();
-      return () => observer.disconnect();
+      window.addEventListener('resize', renderer.resize);
+      return () => {
+        observer.disconnect();
+        window.removeEventListener('resize', renderer.resize);
+      };
     }
 
     let raf = 0;
@@ -286,16 +304,9 @@ export default function CircuitBackground() {
     };
     raf = requestAnimationFrame(frame);
 
-    let lastW = window.innerWidth;
-    let lastH = window.innerHeight;
     const onResize = () => {
-      // Ignore mobile URL-bar jitter; only rebuild on meaningful changes.
-      if (Math.abs(window.innerWidth - lastW) > 64 || Math.abs(window.innerHeight - lastH) > 160) {
-        lastW = window.innerWidth;
-        lastH = window.innerHeight;
-        renderer.resize();
-        if (!raf) raf = requestAnimationFrame(frame);
-      }
+      renderer.resize();
+      if (!raf) raf = requestAnimationFrame(frame);
     };
     window.addEventListener('resize', onResize);
 

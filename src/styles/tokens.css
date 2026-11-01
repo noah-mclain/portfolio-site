@@ -26,7 +26,7 @@
 
 [data-theme='light'] {
   color-scheme: light;
-  --circuit-opacity: 0.45;
+  --circuit-opacity: 0.5;
   --color-bg: #f7f4fa;
   --color-bg-elevated: #fcfafd;
   --color-surface: #ffffff;
@@ -49,7 +49,7 @@
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {
     color-scheme: light;
-    --circuit-opacity: 0.45;
+    --circuit-opacity: 0.5;
     --color-bg: #f7f4fa;
     --color-bg-elevated: #fcfafd;
     --color-surface: #ffffff;
