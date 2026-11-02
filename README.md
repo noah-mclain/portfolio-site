@@ -4,9 +4,9 @@ My corner of the web for the things I build, the work I've done, and what I'm le
 
 The site brings together my projects, experience, and a few ways to get in touch.
 
-**Address:** [nadaa.ddnsfree.com](http://nadaa.ddnsfree.com/)
+**Address:** [nadaa.dev](https://nadaa.dev/)
 
-The address is connected to GitHub Pages through Dynu. HTTPS setup is still in progress; the certificate has not been issued yet.
+The address is connected to GitHub Pages through Namecheap.
 
 ## Run it locally
 
@@ -39,9 +39,9 @@ Built with React 18, TypeScript, and Vite, with CSS Modules for styling and Luci
 
 ## Publishing
 
-GitHub Pages hosts the site. Each push to `main` builds and deploys it through [the deployment workflow](.github/workflows/deploy.yml). In the repository's Pages settings, the source is **GitHub Actions** and the custom domain is `nadaa.ddnsfree.com`.
+GitHub Pages hosts the site. Each push to `main` builds and deploys it through [the deployment workflow](.github/workflows/deploy.yml). In the repository's Pages settings, the source is **GitHub Actions** and the custom domain is `nadaa.dev`.
 
-Dynu manages the DNS records. GitHub handles the TLS certificate once DNS validation and certificate issuance complete; HTTPS enforcement can then be enabled in Pages settings. Because deployment uses GitHub Actions, a `CNAME` file isn't required.
+Namecheap manages the DNS records. GitHub handles the TLS certificate once DNS validation and certificate issuance complete; HTTPS enforcement can then be enabled in Pages settings. Because deployment uses GitHub Actions, a `CNAME` file isn't required.
 
 ## Running it with Docker
 
